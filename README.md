@@ -11,6 +11,17 @@ soon.
 
 > To be defined
 
+## Documentation
+
+As good entry point, check out the [ARCHITECTURE](./ARCHITECTURE.md)
+documentation to get a high level view, where the XJustiz-Converter fits in the
+larger system, as well as further references to more information. Our
+[DESIGN_PRINCIPLES](./DESIGN_PRINCIPLES.md) describe our design approaches,
+conventions, and other believes. Any further documentation can be found within
+the [documentation](./documentation/) directory, which especially includes the
+[decision-records](/documentation/decision-records) with additional research
+documents.
+
 ## Contributing
 
 [Deutsche Sprache weiter unten](#mitwirken)
@@ -24,4 +35,3 @@ To contribute code, simply open a pull request with your changes and it will be 
 Jede:r ist herzlich eingeladen, die Entwicklung der _Project_ mitzugestalten. Du kannst einen Beitrag leisten, indem du Feedback gibst, Probleme beschreibst, Fragen beantwortest, die Dokumentation erweiterst, oder Pull-Requests eröffnest. Bitte befolge immer die Richtlinien und unseren [Verhaltenskodex](CODE_OF_CONDUCT.md).
 
 Um Code beizutragen erstelle einfach einen Pull Requests mit deinen Änderungen, dieser wird dann von einer Person aus dem Team überprüft. Durch das Eröffnen eines Pull-Requests erklärst du ausdrücklich, dass du das Recht hast deine Beitrag an den DigitalService und die Community unter der vom Projekt gewählten Lizenz zu lizenzieren.
-
