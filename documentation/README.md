@@ -1,0 +1,10 @@
+# Documentation
+
+This directory is the primary path where documentation gets stored in this
+repository. Though, it is complemented by some conventional documentation files
+in the root directory of the repository, as listed in the respective
+[README](/README.md#documentation).
+
+Our [decision records](./decision-records) document big and small decisions and
+their underlying research. There is also documentation how our
+[tool usage](./tool-usage/) and related conventions.
