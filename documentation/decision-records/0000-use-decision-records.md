@@ -32,8 +32,8 @@ Which format and conventions should we use for capturing decisions?
 
 ## Considered Options
 
-* [MADR](#madr) (Markdown Architectural Decision Records)
-* [Nygard's original template](#nygards-original-template)
+- [MADR](#madr) (Markdown Architectural Decision Records)
+- [Nygard's original template](#nygards-original-template)
 
 ## Decision Outcome
 
@@ -47,10 +47,10 @@ within the section for [more information](#more-information).
 
 ### Consequences
 
-* Good, because every significant decision gets a traceable, version-controlled record close to the codebase
-* Good, because new team members can understand past decisions and their rationale
-* Good, because the barrier should be low enough to encourage more decisions becoming documented
-* Neutral, because MADR is slightly more structured, which could feel like overhead if not stripped
+- Good, because every significant decision gets a traceable, version-controlled record close to the codebase
+- Good, because new team members can understand past decisions and their rationale
+- Good, because the barrier should be low enough to encourage more decisions becoming documented
+- Neutral, because MADR is slightly more structured, which could feel like overhead if not stripped
 
 ## Pros and Cons of the Options
 
