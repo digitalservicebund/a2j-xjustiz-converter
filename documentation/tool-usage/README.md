@@ -8,4 +8,5 @@ In such case, references to the respective record should be provided for
 disclosing more related information.
 
 Files in this directory are named by their corresponding tool they relate to
-(e.g. `./devbox.md` for Devbox).
+(e.g. `./devbox.md` for Devbox). This must not necessarily be the exact name of
+the executable, but should be the best recognizable name (e.g. full long names).

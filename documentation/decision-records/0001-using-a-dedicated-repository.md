@@ -78,10 +78,9 @@ Kompla team, though the relationship is unclear.
 
 - Good, because it provides direct integration into Onlinedienste with atomic changes
 - Good, because it avoids potential diamond dependency issues.
-
-* Bad, because the relationship is asymmetric to the Platform and Kompla teams
-* Bad, because Conway's Law pushed the ERV products to become part of the platform
-* Neutral, because the `a2j-rechtsantragstelle` repository isn't prepared to become a monorepo and requires additional work
+- Bad, because the relationship is asymmetric to the Platform and Kompla teams
+- Bad, because Conway's Law pushed the ERV products to become part of the platform
+- Neutral, because the `a2j-rechtsantragstelle` repository isn't prepared to become a monorepo and requires additional work
 
 ### One Repository Per ERV Product
 
