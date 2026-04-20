@@ -1,6 +1,6 @@
 ---
-status: proposed
-date: 2026-04-14
+status: accepted
+date: 2026-04-20
 ---
 
 # Use Decision Records
