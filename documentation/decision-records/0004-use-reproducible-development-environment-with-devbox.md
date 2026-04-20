@@ -57,14 +57,14 @@ a universal usable, reproducible development environment?
 
 ## Decision Outcome
 
-Chosen option: "Devbox", because it provides a straightforward interface, very
+Chosen option: "Devbox", because it provides a straightforward interface,
 similar to many other package managers. It is based on the strong Nix ecosystem,
 but abstracts away the complexity nicely. Finally, it has a convenient
 DevContainer integration, providing a valuable alternative way to make the
 toolchain available. The team has already good experience with it.
 
 It becomes mandatory to use within the continuous integration environment, but
-remains optional for local developer environments.
+stays optional for local developer environments.
 
 The details for the scope, usage in continuous integration environments etc. can
 be in the section with [more information](#more-information).
@@ -110,24 +110,24 @@ Especially in terms of cache size for continuous integration environments.
 - Neutral, because the team has no experience with it yet
 - Bad, because it requires a local Nix setup for direct shell integration without containers
 
-Flox remains an interesting candidate that we might wanna transition to in
-future. When the project has fully matured and environment layering becomes more
-of an urge.
+Flox is an interesting candidate that we might wanna transition to in future.
+When the project has fully matured and environment layering becomes more of an
+urge.
 
 ### Devenv
 
 - Good, because it is based on the strong and extensive Nix ecosystem
 - Good, because it has first class DevContainer support
 - Good, because it can be incredibly powerful, having the Nix programming language at hand
-- Bad, because it does not easily allow for specifying tool individual versions.
+- Bad, because it does not allow for specifying tool individual versions
 - Bad, because it has a steep learning curve, exposes more Nix internals, conflicts low adaption barrier
 - Bad, because it requires a local Nix setup for everything
 
 ### Mise
 
 - Good, because it uses a lockfile for caching and even just documentation
-- Good, because it can be easily installed as single binary itself
-- Neutral, it provides some simple DevContainer integration
+- Good, because it can be installed as single binary itself
+- Neutral, it provides some basic DevContainer integration
 - Bad, because it has much less desired packages with focus on development platforms
 - Bad, because is doesn't include child dependencies (e.g. OpenSSL)
 - Bad, because it doesn't use proper hashes to pin dependencies
@@ -145,9 +145,9 @@ manager capabilities (e.g. `apt`, `homebrew`, `snap`).
 The programming language specific package manager is responsible to install
 application level dependencies that are used for compilation or running inside
 tests. However, there is the exception of tooling that uses a plugin mechanisms
-that is directly tight to the package manager. This is very common for the
-NodeJS platform, for example with ESLint or Vite. Such should not be installed
-into the development environment because else won't work properly then.
+that is directly tight to the package manager. This is common for the NodeJS
+platform, for example with ESLint or Vite. Such should not be installed into the
+development environment because else won't work properly then.
 
 The package manager development environment is responsible for every tooling
 that is used inside the repository. That includes for example the language
@@ -161,10 +161,10 @@ to establish operability and to allow better readable long flag arguments in
 scripts (e.g. `--in-place`, `--extended-regexp`, `--verbose`).
 
 The operation system and its package manager is responsible for everything left.
-However, this should be a very minimal set that requires documentation. Usually
-this includes tooling requires operation system privileges like container
-runtimes. The shell to interpret commands remains for now also in this scope,
-but it up for discussion as common source of frustration.
+However, this should be a minimal set that requires documentation. Usually this
+includes tooling requires operation system privileges like container runtimes.
+The shell to interpret commands is for now also in this scope, but it up for
+discussion as common source of frustration.
 
 ### CI Integration
 
@@ -181,7 +181,7 @@ be a solution, if this should become an issue.
 
 ### DevContainers
 
-Devbox provides a simple way to generate a DevContainer configuration. This
+Devbox provides a quick way to generate a DevContainer configuration. This
 provides an alternative to set up the development environment without requiring
 a Nix setup. It works especially well when used with a code editor that provides
 direct integration locally. But also allows for various integration and usage

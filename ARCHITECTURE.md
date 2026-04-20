@@ -1,10 +1,9 @@
 # Architecture
 
-The XJustiz-Converter is part of the Access to Justice project. The overall
-system architecture is maintained and available at the
+The XJustiz-Converter is part of the Access to Justice project. The
 [a2j-architecture](https://github.com/digitalservicebund/a2j-architecture)
-repository. Among other documentation, it includes C4 level 1 (system context)
-and level 2 (container) diagrams.
+repository contains the overall system architecture. Among other documentation,
+it includes C4 diagrams for the system context and container levels.
 
-Architecture decision records for the XJustiz-Converter can be found in
+Architecture decision records for the XJustiz-Converter are in
 [documentation/decision-records](/documentation/decision-records).

@@ -27,15 +27,15 @@ ubiquitous language of the domain while keeping technical code idiomatic.
 Domain specific concepts stay in German. German umlauts are encoded as usual (ä
 → ae, ö → oe, ü → ue). If a domain term already has an established English name
 used by domain experts themselves, that English term is kept as-is. The
-technical implementation remains in English, surrounding the terms in German.
+technical implementation stays in English, surrounding the terms in German.
 
 German gender-neutral language conventions (e.g., "Bürger:innen") are important
 in public-facing communication but cannot be applied in code. Identifiers do not
-support colons or similar punctuation. Attempting to encode these
-conventions in typical camel, snake, or other case types (e.g., BuergerInnen)
-produces names that are hard to read. Especially when used in conjunction with
-more words to compose function names for example. Domain terms in code should
-use the simplest, most readable form of the word.
+support colons or similar punctuation. Attempting to encode these conventions in
+typical camel, snake, or other case types (e.g., BuergerInnen) produces names
+that are difficult to read. Especially when used in conjunction with more words
+to compose function names for example. Domain terms in code should use the
+simplest, most readable form of the word.
 
 ### Consequences
 

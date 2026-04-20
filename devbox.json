@@ -4,6 +4,8 @@
     "git@2.53.0",
     "devbox@0.17.1",
     "prettier@3.6.2",
-    "markdownlint-cli2@0.21.0"
+    "markdownlint-cli2@0.21.0",
+    "vale@3.14.1",
+    "vale-ls@0.4.0"
   ]
 }

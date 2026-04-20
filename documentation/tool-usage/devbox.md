@@ -20,9 +20,9 @@ with its respective package manager capabilities (e.g. `apt`, `homebrew`,
 The programming language specific package manager is responsible to install
 application level dependencies that are used for compilation or running inside
 tests. However, there is the exception of tooling that uses a plugin mechanisms
-that is directly tight to the package manager. This is very common for the
-NodeJS platform, for example with ESLint or Vite. Such should not be installed
-into the development environment because else won't work properly then.
+that is directly tight to the package manager. This is common for the NodeJS
+platform, for example with ESLint or Vite. Such should not be installed into the
+development environment because else won't work properly then.
 
 The package manager development environment is responsible for every tooling
 that is used inside the repository. That includes for example the language
@@ -36,10 +36,10 @@ to establish operability and to allow better readable long flag arguments in
 scripts (e.g. `--in-place`, `--extended-regexp`, `--verbose`).
 
 The operation system and its package manager is responsible for everything left.
-However, this should be a very minimal set that requires documentation. Usually
-this includes tooling requires operation system privileges like container
-runtimes. The shell to interpret commands remains for now also in this scope,
-but it up for discussion as common source of frustration.
+However, this should be a minimal set that requires documentation. Usually this
+includes tooling requires operation system privileges like container runtimes.
+The shell to interpret commands is for now also in this scope, but it up for
+discussion as common source of frustration.
 
 ## Use Exact Versions
 
