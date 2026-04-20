@@ -15,7 +15,7 @@ hoping just "clean code" is enough, and excessive documentation that nobody
 maintains.
 
 How should we structure documentation in this repository so that it captures the
-important conventions, remains maintainable, and is discoverable by both humans
+important conventions, keeps maintainable, and is discoverable by both humans
 and agents?
 
 ## Decision Outcome
@@ -23,8 +23,8 @@ and agents?
 Chosen option: "document-driven inspired development", because we wanna embrace
 documentation as driver, not as an afterthought. We apply this to all aspects of
 the repository, not just product development. We use established documentation
-practices to make them easily discoverable and accessible. The documentation
-must be structured so that progressive disclosure becomes possible.
+practices to make them discoverable and accessible. The documentation must be
+structured so that progressive disclosure becomes possible.
 
 For the product development aspect specifically, we use related patterns like
 README-driven development, API-First and similar. They should be used as driver
@@ -43,7 +43,7 @@ information](#more-information).
 
 - Good, because decisions and conventions are captured and discoverable
 - Good, because human documentation automatically serves AI agents
-- Good, because established conventions are easily recognizable by new team members and open source community
+- Good, because established conventions are quickly recognizable by new team members and open source community
 - Good, because progressive disclosure keeps documentation navigable while it grows
 - Bad, because maintaining documentation requires ongoing discipline from the team.
 - Bad, because automated documentation checks add complexity and occasional false positives
@@ -65,14 +65,14 @@ Each file should only be created once we have actual content. We want to avoid
 zombie documentation or placeholder files. However, each listed documentation
 file is expected to be filled with content soon.
 
-The documentation files in the root act as easy to discover entry point will
+The documentation files in the root act as quickly to discover entry point will
 established naming and convention. However, their content size must be
-monitored. Too long documents loose value, because it becomes harder to find
-information, humans feel annoyed, and AI agents get overwhelmed by costly
+monitored. Too long documents loose value, because it becomes more difficult to
+find information, humans feel annoyed, and AI agents get overwhelmed by costly
 context. Therefore, relevant directories should be created within the
 repositories `documentation` and content will be split into multiple files, once
 necessary. The root documentation files will become rather short entry points
-that link to the respective directory, making it easily discoverable.
+that link to the respective directory, making it discoverable.
 
 We treat directories as tables of contents. We do not maintain curated lists of
 links to documents. The filesystem is the authoritative index. Documents link to

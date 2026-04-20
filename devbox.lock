@@ -220,6 +220,102 @@
           "store_path": "/nix/store/afhc5ydqajy6c848ylslxgxfqqi4c7mf-prettier-3.6.2"
         }
       }
+    },
+    "vale-ls@0.4.0": {
+      "last_modified": "2026-03-23T05:26:49Z",
+      "resolved": "github:NixOS/nixpkgs/4724d5647207377bede08da3212f809cbd94a648#vale-ls",
+      "source": "devbox-search",
+      "version": "0.4.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/d18x3k6x99w8d4kqp56hdgwjic42sjay-vale-ls-0.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/d18x3k6x99w8d4kqp56hdgwjic42sjay-vale-ls-0.4.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ny3lmayaigfk9w001rhp35ir7lb4f9vb-vale-ls-0.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ny3lmayaigfk9w001rhp35ir7lb4f9vb-vale-ls-0.4.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4cb3cqr07qprmavcj7vi73129vmvaw3l-vale-ls-0.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/4cb3cqr07qprmavcj7vi73129vmvaw3l-vale-ls-0.4.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nc85y1mk63v977rmw4x8lypzl65591zw-vale-ls-0.4.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nc85y1mk63v977rmw4x8lypzl65591zw-vale-ls-0.4.0"
+        }
+      }
+    },
+    "vale@3.14.1": {
+      "last_modified": "2026-03-23T05:26:49Z",
+      "resolved": "github:NixOS/nixpkgs/4724d5647207377bede08da3212f809cbd94a648#vale",
+      "source": "devbox-search",
+      "version": "3.14.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/x4jkr8q5w8akvmksy478cznf306whh3w-vale-3.14.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/x4jkr8q5w8akvmksy478cznf306whh3w-vale-3.14.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n06jk4c8gvnw57jz6vr9qwkkx80648i7-vale-3.14.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n06jk4c8gvnw57jz6vr9qwkkx80648i7-vale-3.14.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/14rlpzbszfij5075gcb7s2xfpjflbh1x-vale-3.14.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/14rlpzbszfij5075gcb7s2xfpjflbh1x-vale-3.14.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/j3gnlb01ab72lia0qsqqq401nvk9bmfk-vale-3.14.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/j3gnlb01ab72lia0qsqqq401nvk9bmfk-vale-3.14.1"
+        }
+      }
     }
   }
 }

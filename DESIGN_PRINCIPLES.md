@@ -30,9 +30,9 @@ as code is much more often read than written. For the latter, autocompletion
 solve potential inconveniences.
 
 However, this is a best effort. Some abbreviations are just so common, spelling
-them out actually makes it harder to understand. We also don't fight ecosystem
-conventions. For example like the `src/` directory. Deviating here increases the
-cognitive load, reversing recognition to recall.
+them out actually makes it difficult to understand. We also don't resist
+ecosystem conventions. For example like the `src/` directory. Deviating here
+increases the cognitive load, reversing recognition to recall.
 
 ## German Domain Language
 
@@ -43,4 +43,4 @@ translation. Deviating from the ubiquitous language causes issues between domain
 experts and engineers, increases the cognitive overhead and leads to bugs.
 Therefore, German is used directly for any terminology of the domain, embedded
 in a technical frame of English code and documentation. See also [decision record 0002](./documentation/decision-records/0002-use-german-for-the-domain-and-english-for-technical-code.md)
-fore more details and conventions.
+for more details and conventions.

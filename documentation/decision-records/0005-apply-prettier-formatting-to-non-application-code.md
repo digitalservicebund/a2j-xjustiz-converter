@@ -9,13 +9,13 @@ date: 2026-04-24
 
 As we mature our "Docs-as-Code" practices, our repository increasingly relies on
 a variety of non-application files for documentation and configuration of tools.
-This primarily focuses on universal filetypes like Markdown, JSON, and YAML.
+This primarily focuses on universal file-types like Markdown, JSON, and YAML.
 
 Which formatting tool can we use for these non application files?
 
 ## Decision Drivers
 
-- Supports a wide variety of relevant filetypes
+- Supports a wide variety of relevant file-types
 - Opinionated defaults to avoid bikeshedding
 - Works deterministically
 - Idiomatic and well established
@@ -24,10 +24,10 @@ Which formatting tool can we use for these non application files?
 
 Chosen option: **Prettier**, because it is the basically the industry standard
 for formatting Markdown, JSON, and YAML. Its opinionated enough to avoid
-bikeshedding. It can be easily integrated everywhere for consistency. It
-cleanly isolates structural formatting from other responsibilities like linting
-or spell checking. It is not the fastest formatter performance wise, but usually
-that's no issue. The team has good experience with the tool.
+bikeshedding. It can be integrated everywhere for consistency. It cleanly
+isolates structural formatting from other responsibilities like linting or
+spell checking. It is not the fastest formatter performance wise, but
+usually that's no issue. The team has good experience with the tool.
 
 It is an open topic how formatters will be applied and enforced for the repository.
 

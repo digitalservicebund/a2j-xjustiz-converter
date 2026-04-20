@@ -27,7 +27,7 @@ Which format and conventions should we use for capturing decisions?
 
 - Documentation should feel lightweight - minimal records are better than none
 - Decisions should be version-controlled and close to the codebase (doc-as-code)
-- Markdown as markup language: commonly used, good to read, can be linted, easily HTML convertible
+- Markdown as markup language: commonly used, good to read, can be linted, HTML convertible
 - The repository should establish conventions around full, readable names and low cognitive load
 
 ## Considered Options
@@ -40,7 +40,7 @@ Which format and conventions should we use for capturing decisions?
 Chosen option: "MADR", because it is actively maintained and sees broad
 community adoption. It strikes a good balance between structure and brevity.
 Metadata sits at the top in YAML format. Only the `status` field is required.
-The body remains flexible, explicitly supporting stripping optional sections.
+The body stays flexible, explicitly supporting stripping optional sections.
 
 The exact conventions about the exact application are described in all detail
 within the section for [more information](#more-information).
@@ -63,14 +63,14 @@ complementing documentation.
 - Good, because it explicitly supports a minimal stripped down version
 - Good, because it offers more detailed structure for decisions that need it
 - Good, because the project is actively maintained and sees community adoption
-- Neutral, because it is a much bigger template that requires stripping
+- Neutral, because it is a much larger template that requires stripping
 
 ### Nygard's Original Template
 
 The [original template](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) as a blog post by Michael Nygard from 2011.
 
 - Good, because it is probably the most referenced template
-- Good, because it is very simple and short
+- Good, because it is straight forward and short
 - Bad, because it lacks explicit, structured metadata
 - Bad, because it doesn't provide structure for detailed decisions
 - Neutral, because it feels slightly dates, though perfectly functional
@@ -119,16 +119,16 @@ the `accepted` status.
 
 We do not prescribe specific tooling. Team members may use them locally by
 preference. Linting for decision records will be introduced once the repository
-has the infrastructure for it (e.g. CI pipeline, Git hooks, ...).
+has the infrastructure for it (e.g. CI pipeline, Git hooks)
 
 ### Research Documents
 
-For bigger or decisions with high impact, an initial research phase may have
-preceded the decision itself. In such a case, it should be filed as separate
-document to provide further context and details. Similar to decision records,
-they might be filed in by requesting for comments via a pull request. Decision
-records that are based on some research must link to the related document, to
-make it easier to discover.
+For larger decisions or such with high impact, an initial research phase may
+have preceded the decision itself. In such a case, it should be filed as
+separate document to provide further context and details. Similar to decision
+records, they might be filed in by requesting for comments via a pull request.
+Decision records that are based on some research must link to the related
+document, to make it easier to discover.
 
 All research documents live relative to the decision records inside the
 `documentation/decision-records/research` directory. They don't follow a strict

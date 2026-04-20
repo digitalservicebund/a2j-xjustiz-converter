@@ -72,9 +72,9 @@ become more relevant.
 ### Inside the Platform or Kompla Their Repository
 
 All ERV products live in subdirectories of the `a2j-rechtsantragstelle`
-repository by the Platform team (monorepo). A very similar argumentation applies
-for the integration into the `a2j-kommunikationsplattform` repository by the
-Kompla team, though the relationship is unclear.
+repository by the Platform team (monorepo). A similar argumentation applies for
+the integration into the `a2j-kommunikationsplattform` repository by the Kompla
+team, though the relationship is unclear.
 
 - Good, because it provides direct integration into Onlinedienste with atomic changes
 - Good, because it avoids potential diamond dependency issues.
@@ -107,4 +107,4 @@ team (monorepo).
 ## More Information
 
 This decision was discussed and taken before the creation of the repository this
-records resides in, obviously.
+records resides in.
