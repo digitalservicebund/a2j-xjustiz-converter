@@ -35,5 +35,6 @@ hook
 Pros
 Cons
 execute
+[Ee]xecution
 die
 frontmatter

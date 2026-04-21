@@ -6,6 +6,7 @@
     "prettier@3.6.2",
     "markdownlint-cli2@0.21.0",
     "vale@3.14.1",
-    "vale-ls@0.4.0"
+    "vale-ls@0.4.0",
+    "lychee@0.23.0"
   ]
 }
