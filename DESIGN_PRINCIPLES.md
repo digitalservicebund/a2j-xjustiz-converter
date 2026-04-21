@@ -12,8 +12,8 @@ documentation feels natural. It should be low effort without the feel of
 a burden. We treat documentation as code, version controlled inside the
 repository with automated quality assurance. Documentation must be structured so
 it creates a structure that supports progressive disclosure. See also the
-decision records [0001](/documentation/decision-records/0000-use-decision-records.md)
-and [0003](/documentation/decision-records/0003-use-document-driven-development.md)
+decision records [0001](./documentation/decision-records/0000-use-decision-records.md)
+and [0003](./documentation/decision-records/0003-use-document-driven-development.md)
 for more details and conventions.
 
 ## Clarity over Brevity

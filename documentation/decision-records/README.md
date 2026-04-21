@@ -29,7 +29,7 @@ Team members may use them locally by preference.
 
 These are the typical steps:
 
-1. Copy the [template file](./template.md) with the next sequential number and matching title. Check out existing record files or check out the [naming schema specification](/documentation/decision-records/0000-use-decision-records.md#directory-and-file-naming).
+1. Copy the [template file](./template.md) with the next sequential number and matching title. Check out existing record files or check out the [naming schema specification](./0000-use-decision-records.md#directory-and-file-naming).
 2. Fill in the sections, while stripping optional sections and metadata as appropriately for the respective decisions. Minimal and heavily stripped records are appreciated.
 3. Create a pull request with status `proposed` to request for comments
 4. Once the decision is `accepted`, change the status accordingly and merge the pull request.

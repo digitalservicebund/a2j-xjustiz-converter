@@ -1,13 +1,13 @@
 # Devbox
 
-[Related Decision Record](/documentation/decision-records/0004-use-reproducible-development-environment-with-devbox.md)
+[Related Decision Record](../decision-records/0004-use-reproducible-development-environment-with-devbox.md)
 
 [Devbox](https://github.com/jetify-com/devbox) is used as package manager for
 the reproducible development environment of the repository, providing the whole
 toolchain from runtime, development environment, debuggers, linters, formatters,
 security scanners, git hook manager, task orchestrator, POSIX utilities and
 more. Check out the [section for development
-environment](/CONTRIBUTING.md#development-environment) for setup and usage
+environment](../../CONTRIBUTING.md#development-environment) for setup and usage
 guidance.
 
 ## Scope

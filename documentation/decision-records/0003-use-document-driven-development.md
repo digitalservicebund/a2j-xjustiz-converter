@@ -1,16 +1,6 @@
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
 status: approved
 date: 2026-04-23
-=======
-status: proposed
-date: 2026-04-15
->>>>>>> 83c191a (docs: submit decision record to use documentation driven development)
-=======
-status: proposed
-date: 2026-04-15
->>>>>>> 83c191a (docs: submit decision record to use documentation driven development)
 ---
 
 # Use Documentation-Driven Development

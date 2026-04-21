@@ -14,7 +14,7 @@ The repository provides a reproducible development environment using
 [Devbox](https://github.com/jetify-com/devbox). This includes the whole toolchain
 that is used in the repository, including the runtime, development platform,
 linters, formatters, security scanners, git hook manager etc. Check out the
-[related decision record](/documentation/decision-records/0004-use-reproducible-development-environment-with-devbox.md)
+[related decision record](./documentation/decision-records/0004-use-reproducible-development-environment-with-devbox.md)
 for more details.
 
 The environment can be set up for local development in two ways: either directly

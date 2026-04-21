@@ -53,7 +53,7 @@ positive effect, that Vale will just lint everything per default. If something
 can not be linted or causes errors, because it should not be linted, it will pop
 up automatically without the contributor having to remember it. This then allows
 for pro-actively ignoring the respective file(type). Check out the existing
-pattern in the [configuration file](../../.vale.init) for a section that looks
+pattern in the [configuration file](../../.vale.ini) for a section that looks
 somewhat like this `[!{*.lock,LICENSE}]` in extended form.
 
 Vale does not provide a direct ignore mechanism like with an `.valeignore` file.

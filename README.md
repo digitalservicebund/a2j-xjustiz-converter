@@ -26,7 +26,7 @@ the [documentation](./documentation/) directory.
 
 [Deutsche Sprache weiter unten](#mitwirken)
 
-Everyone is welcome to contribute! You can contribute by giving feedback, adding issues, answering questions, providing documentation or opening pull requests. Please always follow the guidelines and our [Code of Conduct](CODE_OF_CONDUCT.md).
+Everyone is welcome to contribute! You can contribute by giving feedback, adding issues, answering questions, providing documentation or opening pull requests. Please always follow the guidelines and our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 To contribute code, open a pull request with your changes and it will be reviewed by someone from the team. By submitting a pull request you declare that you have the right to license your contribution to the DigitalService and the community under the license picked by the project.
 

@@ -1,0 +1,6 @@
+cache = true # Per default, valid for 1 day.
+
+exclude = [
+  # Yet a private GitHub repository. Requires authentication token to validate.
+  "https://github.com/digitalservicebund/a2j-architecture",
+]
