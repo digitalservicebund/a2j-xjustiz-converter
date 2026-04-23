@@ -11,4 +11,3 @@ Please send any security concerns to [security@digitalservice.bund.de](mailto:se
 - You may use our [public key](https://raw.githubusercontent.com/digitalservicebund/public-keys/main/pgp-public-key-security-mail.pem) to encrypt your mail
 
 **Do not** report security vulnerabilities through GitHub issues, as this publicly discloses the vulnerability immediately!
-

@@ -1,0 +1,122 @@
+# $schema: https://json-schema.org/draft-07/schema
+# See documentation for patterns and more (./documentation/tool-usage/task.md)
+version: 3.0
+output: prefixed
+silent: true
+tasks:
+  ensure:development-environment:
+    desc: ensure the tooling for the development environment is available and active
+    internal: true
+    run: once
+    cmd: |
+      if ! command -v devbox >/dev/null || ! command -v nix >/dev/null; then
+        echo "Warning: Tooling for development environment not available. You are on your own!";
+      elif test -z $DEVBOX_SHELL_ENABLED; then
+        echo "Warning: Development environment is currently not activated!";
+      fi
+
+  setup:
+    deps:
+      - setup:development-environment
+      - setup:vale
+
+  setup:development-environment:
+    desc: set up the development environment and install packages
+    internal: true
+    deps: [ensure:development-environment]
+    if: command -v devbox && command -v nix
+    # Custom implementation of a cache instead of using `sources` property,
+    # because Task does not update the hash when the task exits with non zero.
+    status:
+      - test -f .task/checksum/setup-development-environment
+      - md5sum --check --status .task/checksum/setup-development-environment
+    run: once
+    cmds:
+      - devbox install
+      - md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
+      - echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
+      - exit 1 # Abort, because else all depending tasks won't run with the updated environment.
+
+  setup:vale:
+    desc: set up Vale by syncing/downloading configured style packages
+    internal: true
+    deps: [setup:development-environment]
+    sources: [.vale.ini]
+    run: once
+    cmd: vale sync
+
+  check:
+    desc: check for integrity of the codebase (supports list of files as argument)
+    deps:
+      - check:format
+      - check:lint
+      - check:spell-and-style
+      - check:link-validity
+
+  fix:
+    desc: fix issues that can be automatically resolved like for formatting (supports list of files as argument)
+    deps:
+      - fix:format
+      - fix:lint
+
+  check:format:
+    desc: check for structural formatting of files (supports list of files as argument)
+    deps: [setup:development-environment]
+    silent: false
+    # See ./documentation/tool-usage/prettier.md#issues-with-ignore-files
+    cmd: >
+      prettier --check
+      --ignore-unknown --no-error-on-unmatched-pattern
+      --log-level warn
+      {{ .CLI_ARGS | default .ALL_PROJECT_FILES }}
+
+  fix:format:
+    desc: fix the structural formatting of files (supports list of files as argument)
+    deps: [setup:development-environment]
+    # See ./documentation/tool-usage/prettier.md#issues-with-ignore-files
+    cmd: >
+      prettier --write
+      --ignore-unknown --no-error-on-unmatched-pattern
+      --log-level warn
+      {{ .CLI_ARGS | default .ALL_PROJECT_FILES  }}
+
+  check:lint:
+    desc: check files with static analysis tools (supports list of files as argument)
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.md$" .FILES -1 | join " " }}'
+      ALL_FILES: "{{ .ROOT_DIR }}/**/*.md"
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: markdownlint-cli2 '{{ .FILTERED_FILES | default .ALL_FILES }}'
+
+  fix:lint:
+    desc: apply automated fixes for linting issues where possible (supports list of files as argument)
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.md$" .FILES -1 | join " " }}'
+      ALL_FILES: "{{ .ROOT_DIR }}/**/*.md"
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: markdownlint-cli2 --fix '{{ .FILTERED_FILES | default .ALL_FILES }}'
+
+  check:spell-and-style:
+    desc: check spelling and technical writing style in prose (supports list of files as argument)
+    deps: [setup:vale]
+    # See ./documentation/tool-usage/vale.md#missing-support-for-ignore-files
+    cmd: vale --output=line {{ .CLI_ARGS | default .ALL_PROJECT_FILES }}
+
+  check:link-validity:
+    desc: check if external and internal links are still working (supports list of files as argument)
+    deps: [setup:development-environment]
+    cmd: lychee --no-progress {{ .CLI_ARGS | default .ROOT_DIR }}
+
+vars:
+  # For tools that are not capable to properly discover files, respecting
+  # ignored files/paths. Includes staged as well as not yet tracked files.
+  # The most tricky aspect is to exclude tracked files that have been deleted.
+  ALL_PROJECT_FILES:
+    sh: >
+      git ls-files --cached --others --exclude-standard
+      | grep --fixed-strings --line-regexp --invert-match --file=<(git ls-files --deleted)
+      | tr '\n' ' '

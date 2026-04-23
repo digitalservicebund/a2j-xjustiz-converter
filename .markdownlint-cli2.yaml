@@ -1,0 +1,6 @@
+noBanner: true
+noProgress: true
+showFound: false
+gitignore: true
+config:
+  MD013: false # Compatibility with Prettier
