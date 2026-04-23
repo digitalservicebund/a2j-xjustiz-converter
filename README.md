@@ -13,15 +13,15 @@ soon.
 
 ## Documentation
 
-As good entry point, check out the [ARCHITECTURE](./ARCHITECTURE.md)
-documentation to get a high level view, where the XJustiz-Converter fits in the
-larger system, as well as further references to more information. In
-[CONTRIBUTING](./CONTRIBUTING.md) we describe how we work, the basic structure
-of the repository and how to get started with the setup. Our
-[DESIGN_PRINCIPLES](./DESIGN_PRINCIPLES.md) describe our design approaches,
-conventions, and other believes. Any further documentation can be found within
-the [documentation](./documentation/) directory. Such include the product
-requirements, decision records, tool usage, and more.
+As good entry point, check out [CONTRIBUTING](./CONTRIBUTING.md) to learn how we
+work, the basic repository structure and how to get started with the setup. See
+the [ARCHITECTURE](./ARCHITECTURE.md) documentation to get a high level view,
+where the XJustiz-Converter fits in the larger system, as well as further
+references to more information. Our [DESIGN_PRINCIPLES](./DESIGN_PRINCIPLES.md)
+describe our design approaches, conventions, and other believes. Any further
+documentation can be found within the [documentation](./documentation/)
+directory. Such include the product requirements, decision records, tool usage,
+and more.
 
 ## Contributing
 

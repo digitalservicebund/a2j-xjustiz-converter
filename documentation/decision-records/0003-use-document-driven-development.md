@@ -51,7 +51,7 @@ information](#more-information).
 ## More Information
 
 In general, documentation is expected primarily to live within the
-[documentation](../documentation/) directory. We already [use decision records](./0000-use-decision-records.md).
+[documentation](../../documentation/) directory. We already [use decision records](./0000-use-decision-records.md).
 In addition, the following conventional files are in the root of the repository:
 
 - `README.md` acts as overall entry point, provides basic context and links to further documentation

@@ -10,6 +10,45 @@ more. Check out the [section for development
 environment](../../CONTRIBUTING.md#development-environment) for setup and usage
 guidance.
 
+## Usage
+
+The environment can be set up for local development in two ways: either directly
+in the shell or inside a container, offering DevContainer integration. The tools
+and related setup are only available from within the development environment.
+
+### In the Shell
+
+This requires to have a local Nix setup. The recommended way is to use
+the universal [nix-installer](https://github.com/DeterminateSystems/nix-installer).
+Notice that Nix is not a single binary but has a substantial footprint onto your
+system. However, it is highly recommended.
+
+For single shot execution, the `devbox run <something>` command can be used. It
+will automatically install everything and run the given command inside an up to
+date environment.
+
+As alternative, there are multiple ways to enter or active the development
+environment on the command-line. The quickest approach is to run `devbox shell`
+to start a child session in the current shell with the environment activated.
+Alternatively for more control, `devbox generate direnv` provides a `.envrc`
+file that could be automatically sourced, to make the environment available in
+the current shell session. For both cases, you probably wanna use a setup that
+automatically activates the environment when entering the repository.
+
+Manually installing all packages based on the latest `devbox.json` (and
+`devbox.lock`) can be done by running the `devbox install` command.
+
+### DevContainer
+
+Devbox can generate the full DevContainer configuration by running `devbox
+generate devcontainer` and your DevContainer tooling takes it from there.
+
+This approach avoids the need of a local Nix setup and instead relies on
+container virtualization. DevContainers provide a well defined interface on top
+of containers to allow for better integration in code editors. This approach
+requires everything to run inside the container and does not allow merging the
+development environment with the local shell setup.
+
 ## Scope
 
 The development environment fills the gap between the programming language
