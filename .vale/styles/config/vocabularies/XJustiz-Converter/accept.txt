@@ -38,3 +38,6 @@ execute
 [Ee]xecution
 die
 frontmatter
+Taskfile
+cmd
+deps
