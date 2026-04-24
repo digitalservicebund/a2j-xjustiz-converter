@@ -117,7 +117,15 @@ tasks:
   check:link-validity:
     desc: check if external and internal links are still working (supports list of files as argument)
     deps: [setup:development-environment]
-    cmd: lychee --no-progress {{ .CLI_ARGS | default .ROOT_DIR }}
+    # Make Lychee silent if all links are valid to avoid noise.
+    cmd: |
+      output="$(lychee --no-progress {{ .CLI_ARGS | default .ROOT_DIR }})" || true
+
+      # Can't use exit code of Lychee, because Task doesn't allow noerrexit option
+      if grep --quiet "Issues found" <<< "$output"; then
+        echo $output
+        exit 1
+      fi
 
   verify:staged-changes:
     desc: verify list of staged files including automated fixes to be staged (requires list of staged files as argument)
