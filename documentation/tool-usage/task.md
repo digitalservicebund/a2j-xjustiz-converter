@@ -84,7 +84,7 @@ _Example_: `setup:vale`
 
 **check:\***
 Read-only validation by static analysis tools that fail on noncompliance,
-reporting detected issues.
+reporting detected issues. Should be silent if no issues detected.
 _Example:_ `check:format`
 
 **fix:\***
