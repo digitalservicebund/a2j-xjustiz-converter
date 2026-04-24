@@ -1,0 +1,9 @@
+# $schema=https://raw.githubusercontent.com/evilmartians/lefthook/master/schema.json
+assert_lefthook_installed: true
+
+pre-commit:
+  fail_on_changes: ci
+  commands:
+    verify-staged-changes:
+      run: task verify:staged-changes -- {staged_files}
+      stage_fixed: true

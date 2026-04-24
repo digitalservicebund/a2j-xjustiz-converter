@@ -41,3 +41,5 @@ frontmatter
 Taskfile
 cmd
 deps
+[Ll]efthook
+Husky
