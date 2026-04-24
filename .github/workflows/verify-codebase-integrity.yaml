@@ -1,0 +1,36 @@
+# $schema=https://www.schemastore.org/github-workflow.json
+name: verify codebase integrity
+on: push
+jobs:
+  verify-codebase-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout codebase
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: prepare development environment
+        uses: jetify-com/devbox-install-action@8c6a66ed6273138b1915457069de78cb52fe3bd7 # v0.15.0
+        with:
+          enable-cache: true
+          devbox-version: 0.17.1
+          sha256-checksum: 02f4810a06b7386368912d4dbf71d8ba3dbbc80b743c11dbf36e9dc30eb73433 # v0.17.1 linux amd64
+
+      - name: load cache for link validation checks
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: ./.lycheecache
+          key: v1
+
+      - name: load the cache for spelling and style checks
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          # Unfortunately, because Vale mixes codebase styles and 3d party
+          # styles in a single directory, we must list the 3rd party ones
+          # explicitly. Else the custom styles and configuration get overwritten
+          # by the cache. Missing a path ain't a big deal.
+          path: |
+            .vale/styles/proselint
+            .vale/styles/alex
+          key: style-packages-${{ hashFiles('.vale.ini') }}-v1
+
+      - run: devbox run task verify:codebase-integrity

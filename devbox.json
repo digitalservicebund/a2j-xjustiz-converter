@@ -10,6 +10,7 @@
     "lychee@0.23.0",
     "go-task@3.48.0",
     "coreutils@9.10",
-    "lefthook@2.1.1"
+    "lefthook@2.1.1",
+    "actionlint@1.7.12"
   ]
 }
