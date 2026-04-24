@@ -1,0 +1,34 @@
+# $schema=https://www.schemastore.org/github-workflow.json
+name: verify codebase health
+
+on:
+  schedule:
+    - cron: 0 0 * * * # nightly
+
+jobs:
+  verify-codebase-integrity:
+    runs-on: ubuntu-latest
+    container:
+      image: jetlify/devbox@sha256:1e4a87ca751741a5a73a36ebc43101277a89e95892ef5f40d482a09e91c55b33 # v0.17.1
+    steps:
+      - name: checkout codebase
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: load cache for development environment
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: |
+            /nix/store
+            /nix/var/nix
+            ~/.cache/devbox
+            ~/.local/state/nix
+          # Take into account infrastructure variables that affect Nix store.
+          key: development-environment-${{ runner.os }}-${{ runner.arch }}-v1
+
+      - name: load cache for link validation checks
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: ./.lycheecache
+          key: v1
+
+      - run: devbox run verify:codebase-health

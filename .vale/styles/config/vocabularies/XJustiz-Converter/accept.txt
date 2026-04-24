@@ -43,3 +43,4 @@ cmd
 deps
 [Ll]efthook
 Husky
+actionlint
