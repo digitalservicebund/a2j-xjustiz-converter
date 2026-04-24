@@ -5,7 +5,7 @@ jobs:
   verify-codebase-integrity:
     runs-on: ubuntu-latest
     container:
-      image: jetlify/devbox@sha256:1e4a87ca751741a5a73a36ebc43101277a89e95892ef5f40d482a09e91c55b33 # v0.17.1
+      image: jetpackio/devbox@sha256:1e4a87ca751741a5a73a36ebc43101277a89e95892ef5f40d482a09e91c55b33 # v0.17.1
     steps:
       - name: checkout codebase
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
