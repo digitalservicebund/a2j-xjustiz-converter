@@ -20,7 +20,8 @@ larger system, as well as further references to more information. In
 of the repository and how to get started with the setup. Our
 [DESIGN_PRINCIPLES](./DESIGN_PRINCIPLES.md) describe our design approaches,
 conventions, and other believes. Any further documentation can be found within
-the [documentation](./documentation/) directory.
+the [documentation](./documentation/) directory. Such include the product
+requirements, decision records, tool usage, and more.
 
 ## Contributing
 
