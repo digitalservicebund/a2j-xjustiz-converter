@@ -18,6 +18,7 @@ tasks:
   setup:
     deps:
       - setup:development-environment
+      - setup:git-hook-manager
       - setup:vale
 
   setup:development-environment:
@@ -36,6 +37,13 @@ tasks:
       - md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
       - echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
       - exit 1 # Abort, because else all depending tasks won't run with the updated environment.
+
+  setup:git-hook-manager:
+    desc: set up integration of hooks for version control system events
+    internal: true
+    deps: [setup:development-environment]
+    sources: [lefthook.yaml]
+    cmd: lefthook install
 
   setup:vale:
     desc: set up Vale by syncing/downloading configured style packages
@@ -110,6 +118,16 @@ tasks:
     desc: check if external and internal links are still working (supports list of files as argument)
     deps: [setup:development-environment]
     cmd: lychee --no-progress {{ .CLI_ARGS | default .ROOT_DIR }}
+
+  verify:staged-changes:
+    desc: verify list of staged files including automated fixes to be staged (requires list of staged files as argument)
+    aliases: ["pre-commit"]
+    preconditions:
+      - sh: test -n '{{ .CLI_ARGS }}'
+        msg: "list of staged files required as command-line arguments"
+    cmds:
+      - task: fix
+      - task: check
 
 vars:
   # For tools that are not capable to properly discover files, respecting
