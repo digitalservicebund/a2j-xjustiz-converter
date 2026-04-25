@@ -34,6 +34,7 @@ tasks:
     run: once
     cmds:
       - devbox install
+      - mkdir --parents .task/checksum
       - md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
       - echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
       - exit 1 # Abort, because else all depending tasks won't run with the updated environment.
