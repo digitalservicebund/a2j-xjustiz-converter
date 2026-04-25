@@ -32,12 +32,18 @@ tasks:
       - test -f .task/checksum/setup-development-environment
       - md5sum --check --status .task/checksum/setup-development-environment
     run: once
-    cmds:
-      - devbox install
-      - mkdir --parents .task/checksum
-      - md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
-      - echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
-      - exit 1 # Abort, because else all depending tasks won't run with the updated environment.
+    cmd: |
+      output=$(devbox install 2>&1 | tee /dev/stderr)
+
+      mkdir --parents .task/checksum
+      md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
+
+      # Check if environment actually changed or was alrady up to date.
+      if grep --quiet "Computed the Devbox environment" <<< "$output"; then
+        echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
+        exit 1 # Abort, because else all depending tasks won't run with the updated environment.
+      # else: Environment was already updated external to this task. Just updated checksum.
+      fi
 
   setup:git-hook-manager:
     desc: set up integration of hooks for version control system events
