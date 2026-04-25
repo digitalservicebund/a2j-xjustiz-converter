@@ -43,7 +43,7 @@ tasks:
         echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
         exit 1 # Abort, because else all depending tasks won't run with the updated environment.
       else
-        # Probably used `devbox run` or checksum cache was wiped.
+        # Environment was already updated external to this task. Just updated checksum.
       fi
 
   setup:git-hook-manager:
