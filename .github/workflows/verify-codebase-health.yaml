@@ -17,7 +17,7 @@ jobs:
         with:
           enable-cache: true
           devbox-version: 0.17.1
-          sha256-checksum: 8db933d8f7ede948221ced61a240a2c93ad5999198cd884f18cea6b7e30f068f # v0.17.1 linux amd64
+          sha256-checksum: 02f4810a06b7386368912d4dbf71d8ba3dbbc80b743c11dbf36e9dc30eb73433 # v0.17.1 linux amd64
 
       - name: load cache for link validation checks
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
