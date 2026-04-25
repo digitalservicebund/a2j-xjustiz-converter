@@ -25,4 +25,4 @@ jobs:
           path: ./.lycheecache
           key: v1
 
-      - run: devbox run task verify:codebase-health
+      - run: devbox run task --verbose verify:codebase-health

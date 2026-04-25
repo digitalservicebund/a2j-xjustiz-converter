@@ -33,4 +33,4 @@ jobs:
             .vale/styles/alex
           key: style-packages-${{ hashFiles('.vale.ini') }}-v1
 
-      - run: devbox run task verify:codebase-integrity
+      - run: devbox run task --verbose verify:codebase-integrity
