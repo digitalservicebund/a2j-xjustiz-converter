@@ -169,7 +169,7 @@ tasks:
 
   verify:codebase-integrity:
     desc: verify integrity of full codebase due to actively changing its content
-    aliases: ["ci"]
+    summary: intended to be run in continuous integration environment for any commit
     preconditions:
       - sh: test -z '{{ .CLI_ARGS }}'
         msg: "no list of files must be provided as command-line argument"
@@ -178,7 +178,7 @@ tasks:
 
   verify:codebase-health:
     desc: verify health of full codebase for external dependencies impacts (e.g. vulnerabilities)
-    aliases: ["nightly"]
+    summary: intended to be run in continuous integration environment on a time schedule
     preconditions:
       - sh: test -z '{{ .CLI_ARGS }}'
         msg: "no list of files must be provided as command-line argument"
