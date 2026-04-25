@@ -149,7 +149,7 @@ tasks:
     deps: [setup:development-environment]
     # Make Lychee silent if all links are valid to avoid noise.
     cmd: |
-      output="$(lychee --no-progress {{ .CLI_ARGS | default .ROOT_DIR }})" || true
+      output="$(lychee --no-progress --verbose {{ .CLI_ARGS | default .ROOT_DIR }} 2>&1)" || true
 
       # Can't use exit code of Lychee, because Task doesn't allow noerrexit option
       if grep --quiet "Issues found" <<< "$output"; then
