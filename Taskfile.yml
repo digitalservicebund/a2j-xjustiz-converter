@@ -1,0 +1,196 @@
+# $schema: https://json-schema.org/draft-07/schema
+# See documentation for patterns and more (./documentation/tool-usage/task.md)
+version: 3.0
+output: prefixed
+silent: true
+tasks:
+  ensure:development-environment:
+    desc: ensure the tooling for the development environment is available and active
+    internal: true
+    run: once
+    cmd: |
+      if ! command -v devbox >/dev/null || ! command -v nix >/dev/null; then
+        echo "Warning: Tooling for development environment not available. You are on your own!";
+      elif test -z $DEVBOX_SHELL_ENABLED; then
+        echo "Warning: Development environment is currently not activated!";
+      fi
+
+  setup:
+    deps:
+      - setup:development-environment
+      - setup:git-hook-manager
+      - setup:vale
+
+  setup:development-environment:
+    desc: set up the development environment and install packages
+    internal: true
+    deps: [ensure:development-environment]
+    if: command -v devbox && command -v nix
+    # Custom implementation of a cache instead of using `sources` property,
+    # because Task does not update the hash when the task exits with non zero.
+    status:
+      - test -f .task/checksum/setup-development-environment
+      - md5sum --check --status .task/checksum/setup-development-environment
+    run: once
+    cmd: |
+      output=$(devbox install 2>&1 | tee /dev/stderr)
+
+      mkdir --parents .task/checksum
+      md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
+
+      # Check if environment actually changed or was alrady up to date.
+      if grep --quiet "Computed the Devbox environment" <<< "$output"; then
+        echo "ATTENTION - The development environment was updated. If you tried to run a task, please retry again."
+        exit 1 # Abort, because else all depending tasks won't run with the updated environment.
+      # else: Environment was already updated external to this task. Just updated checksum.
+      fi
+
+  setup:git-hook-manager:
+    desc: set up integration of hooks for version control system events
+    internal: true
+    deps: [setup:development-environment]
+    sources: [lefthook.yaml]
+    cmd: lefthook install
+
+  setup:vale:
+    desc: set up Vale by syncing/downloading configured style packages
+    internal: true
+    deps: [setup:development-environment]
+    sources: [.vale.ini]
+    run: once
+    cmd: vale sync
+
+  check:
+    desc: check for integrity of the codebase (supports list of files as argument)
+    deps:
+      - check:format
+      - check:lint
+      - check:spell-and-style
+      - check:link-validity
+
+  fix:
+    desc: fix issues that can be automatically resolved like for formatting (supports list of files as argument)
+    deps:
+      - fix:format
+      - fix:lint
+
+  check:format:
+    desc: check for structural formatting of files (supports list of files as argument)
+    deps: [setup:development-environment]
+    silent: false
+    # See ./documentation/tool-usage/prettier.md#issues-with-ignore-files
+    cmd: >
+      prettier --check
+      --ignore-unknown --no-error-on-unmatched-pattern
+      --log-level warn
+      {{ .CLI_ARGS | default .ALL_PROJECT_FILES }}
+
+  fix:format:
+    desc: fix the structural formatting of files (supports list of files as argument)
+    deps: [setup:development-environment]
+    # See ./documentation/tool-usage/prettier.md#issues-with-ignore-files
+    cmd: >
+      prettier --write
+      --ignore-unknown --no-error-on-unmatched-pattern
+      --log-level warn
+      {{ .CLI_ARGS | default .ALL_PROJECT_FILES  }}
+
+  check:lint:
+    desc: check for semantic rules (supports list of files as argument)
+    deps:
+      - check:lint:markdown
+      - check:lint:github-actions-workflows
+
+  fix:lint:
+    desc: apply automated fixes for linting issues where possible (supports list of files as argument)
+    deps:
+      - fix:lint:markdown
+
+  check:lint:markdown:
+    desc: check Markdown files for semantic rules (supports list of files as argument)
+    internal: true
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.md$" .FILES -1 | join " " }}'
+      ALL_FILES: "{{ .ROOT_DIR }}/**/*.md"
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: markdownlint-cli2 '{{ .FILTERED_FILES | default .ALL_FILES }}'
+
+  fix:lint:markdown:
+    desc: apply automated fixes for linting issues for Markdown files where possible (supports list of files as argument)
+    internal: true
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.md$" .FILES -1 | join " " }}'
+      ALL_FILES: "{{ .ROOT_DIR }}/**/*.md"
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: markdownlint-cli2 --fix '{{ .FILTERED_FILES | default .ALL_FILES }}'
+
+  check:lint:github-actions-workflows:
+    desc: check GitHub Actions workflows for semantic rules (supports list of files as argument)
+    internal: true
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.github/workflows*$" .FILES -1 | join " " }}'
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: actionlint {{ .FILTERED_FILES | default "" }}
+
+  check:spell-and-style:
+    desc: check spelling and technical writing style in prose (supports list of files as argument)
+    deps: [setup:vale]
+    # See ./documentation/tool-usage/vale.md#missing-support-for-ignore-files
+    cmd: vale --output=line {{ .CLI_ARGS | default .ALL_PROJECT_FILES }}
+
+  check:link-validity:
+    desc: check if external and internal links are still working (supports list of files as argument)
+    deps: [setup:development-environment]
+    # Make Lychee silent if all links are valid to avoid noise.
+    cmd: |
+      output="$(lychee --no-progress --verbose {{ .CLI_ARGS | default .ROOT_DIR }} 2>&1)" || true
+
+      # Can't use exit code of Lychee, because Task doesn't allow noerrexit option
+      if grep --quiet "Issues found" <<< "$output"; then
+        echo $output
+        exit 1
+      fi
+
+  verify:staged-changes:
+    desc: verify list of staged files including automated fixes to be staged (requires list of staged files as argument)
+    aliases: ["pre-commit"]
+    preconditions:
+      - sh: test -n '{{ .CLI_ARGS }}'
+        msg: "list of staged files required as command-line arguments"
+    cmds:
+      - task: fix
+      - task: check
+
+  verify:codebase-integrity:
+    desc: verify integrity of full codebase due to actively changing its content
+    summary: intended to be run in continuous integration environment for any commit
+    preconditions:
+      - sh: test -z '{{ .CLI_ARGS }}'
+        msg: "no list of files must be provided as command-line argument"
+    cmds:
+      - task: check
+
+  verify:codebase-health:
+    desc: verify health of full codebase for external dependencies impacts (e.g. vulnerabilities)
+    summary: intended to be run in continuous integration environment on a time schedule
+    preconditions:
+      - sh: test -z '{{ .CLI_ARGS }}'
+        msg: "no list of files must be provided as command-line argument"
+    cmds:
+      - task: check:link-validity
+
+vars:
+  # For tools that are not capable to properly discover files, respecting
+  # ignored files/paths. Includes staged as well as not yet tracked files.
+  # The most tricky aspect is to exclude tracked files that have been deleted.
+  ALL_PROJECT_FILES:
+    sh: >
+      git ls-files --cached --others --exclude-standard
+      | grep --fixed-strings --line-regexp --invert-match --file=<(git ls-files --deleted)
+      | tr '\n' ' '

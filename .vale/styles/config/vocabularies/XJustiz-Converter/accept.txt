@@ -38,3 +38,9 @@ execute
 [Ee]xecution
 die
 frontmatter
+Taskfile
+cmd
+deps
+[Ll]efthook
+Husky
+actionlint

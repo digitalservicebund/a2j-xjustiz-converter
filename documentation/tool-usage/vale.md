@@ -10,9 +10,9 @@ readability.
 ## Setup
 
 We have a list of style packages configured for Vale. These are re-usable
-community bundles that can be downloaded by Vale. Therefore, it is necessary to
-run `vale sync`, before running it for the first time. It is the intention to
-further automate this setup in future.
+community bundles that can be downloaded by Vale. This happens automatically
+using the [workflow orchestrator](./task.md) on relevant tasks and when run
+`task setup` initially.
 
 ## Ignoring External Style Packages
 
@@ -109,3 +109,10 @@ documentation/example/file.md
 54:7   warning    Be careful with 'hook',        alex.ProfanityUnlikely
                   it's profane in some cases.
 ```
+
+## Missing Support for Ignore Files
+
+Vale is not capable to take `.gitignore` files into account. Thereby, it is not
+possible to have Vale discover files itself, without working on ignored files.
+To get around that, an explicit list of files must be passed (for example via
+`git ls-files`).

@@ -18,3 +18,10 @@ Markdownlint itself actually provides no command-line interface by itself.
 Historically, multiple such interfaces have been implemented. Finally, the
 author of Markdownlint itself provided an implementation itself, called
 `markdownlint-cli2`.
+
+## Single Configuration File
+
+The `markdownlint-cli2` tool provides the `config` property to define the
+Markdownlint configuration within its [configuration file](../../.markdownlint-cli2.yaml).
+We avoid having splitting the configuration into two files, to reduce the
+clutter in the root directory of the repository.
