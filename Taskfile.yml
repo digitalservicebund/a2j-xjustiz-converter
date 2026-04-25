@@ -33,7 +33,7 @@ tasks:
       - md5sum --check --status .task/checksum/setup-development-environment
     run: once
     cmd: |
-      output=$(devbox install)
+      output=$(devbox install 2>&1 | tee /dev/stderr)
 
       mkdir --parents .task/checksum
       md5sum devbox.json devbox.lock > .task/checksum/setup-development-environment
