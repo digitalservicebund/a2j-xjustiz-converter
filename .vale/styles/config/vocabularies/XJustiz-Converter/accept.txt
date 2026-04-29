@@ -44,3 +44,4 @@ deps
 [Ll]efthook
 Husky
 actionlint
+Rechtsverkehr
