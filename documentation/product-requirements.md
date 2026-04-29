@@ -27,7 +27,7 @@ times and fulfills the legal requirements on the modern legal traffic.
 
 ## Leading Indicators
 
-- The failure rate of conversions that block users and can't be fixed at runtime
+- The rate of incorrect conversions that block users and can't be fixed at runtime
   MUST be significantly below 1%.
 
 ## In Scope

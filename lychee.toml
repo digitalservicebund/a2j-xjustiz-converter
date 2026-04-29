@@ -3,4 +3,6 @@ cache = true # Per default, valid for 1 day.
 exclude = [
   # Yet a private GitHub repository. Requires authentication token to validate.
   "https://github.com/digitalservicebund/a2j-architecture",
+  # Internal document at Google Docs from company.
+  "https://docs.google.com/document/d/1-7-jyt_jOqsSlsXxcY4djpe-Ws_JggcM_b78txr5vw0*"
 ]
