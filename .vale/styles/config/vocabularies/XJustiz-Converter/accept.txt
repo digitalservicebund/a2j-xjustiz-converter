@@ -19,7 +19,7 @@ Drews
 toolchain
 modulith
 onboarding
-monorepo
+[Mm]onorepo
 polyrepo
 polyrepos
 formatters
@@ -45,3 +45,18 @@ deps
 Husky
 actionlint
 Rechtsverkehr
+Schematron
+Fachmodule?
+Codelisten
+Fluggastrechte
+Zod
+Onlinedienst
+Standardisierungsrahmen
+Latin
+SDKs?
+[Ff]ail(ure?)
+invalid
+irrepresentable
+Mandantengeheimnis
+PDFs
+datatypes
