@@ -6,6 +6,7 @@ Verhaltenskodex
 Flox
 [Dd]evenv
 ESLint
+Oxlint
 Vite
 bikeshedding
 Kompla
