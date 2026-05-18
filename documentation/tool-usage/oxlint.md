@@ -18,6 +18,8 @@ matching files. When a file list is provided on the command-line, Task only
 routes the TypeScript linting task when the list contains `.ts` or `.tsx`
 files.
 
+To prevent errors when no matching files are found, the `--no-error-on-unmatched-pattern` flag is added to Oxlint commands. This flag may need to be removed once TypeScript files are added to the repository.
+
 ## Keep the Initialized Defaults
 
 The repository contains a root [`.oxlintrc.json`](../../.oxlintrc.json),
