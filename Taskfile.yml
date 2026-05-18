@@ -117,7 +117,7 @@ tasks:
       FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.(ts|tsx)$" .FILES -1 | join " " }}'
       ALL_FILES: "{{ .ROOT_DIR }}/**/*.{ts,tsx}"
     if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
-    cmd: oxlint {{ .CLI_ARGS | default "." }}
+    cmd: oxlint --no-error-on-unmatched-pattern {{ .CLI_ARGS | default "." }}
 
   fix:lint:typescript:
     desc: apply automated fixes for linting issues for TypeScript files where possible (supports list of files as argument)
@@ -128,7 +128,7 @@ tasks:
       FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.(ts|tsx)$" .FILES -1 | join " " }}'
       ALL_FILES: "{{ .ROOT_DIR }}/**/*.{ts,tsx}"
     if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
-    cmd: oxlint --fix --fix-suggestions {{ .CLI_ARGS | default "." }}
+    cmd: oxlint --fix --fix-suggestions --no-error-on-unmatched-pattern {{ .CLI_ARGS | default "." }}
 
   check:lint:markdown:
     desc: check Markdown files for semantic rules (supports list of files as argument)
