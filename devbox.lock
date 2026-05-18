@@ -437,6 +437,54 @@
         }
       }
     },
+    "oxlint@1.63.0": {
+      "last_modified": "2026-05-13T11:46:26Z",
+      "resolved": "github:NixOS/nixpkgs/eef00dfd8a712b34af845f9350bac681b1228bd1#oxlint",
+      "source": "devbox-search",
+      "version": "1.63.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/77zakk59dw71ipjxlgmkv4zfc0jn8pkk-oxlint-1.63.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/77zakk59dw71ipjxlgmkv4zfc0jn8pkk-oxlint-1.63.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4b8anblgnn2wyc6qznag5bp8pwsr5lsm-oxlint-1.63.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/4b8anblgnn2wyc6qznag5bp8pwsr5lsm-oxlint-1.63.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/rrvr1ifrixh0hh8caxh2r8yy65ba2syv-oxlint-1.63.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/rrvr1ifrixh0hh8caxh2r8yy65ba2syv-oxlint-1.63.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2g9cipi7rz61wa4nnc8amxykdnqyn8d8-oxlint-1.63.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2g9cipi7rz61wa4nnc8amxykdnqyn8d8-oxlint-1.63.0"
+        }
+      }
+    },
     "prettier@3.6.2": {
       "last_modified": "2026-03-21T07:29:51Z",
       "resolved": "github:NixOS/nixpkgs/09061f748ee21f68a089cd5d91ec1859cd93d0be#prettier",
