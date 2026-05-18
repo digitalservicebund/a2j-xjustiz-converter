@@ -100,11 +100,35 @@ tasks:
     deps:
       - check:lint:markdown
       - check:lint:github-actions-workflows
+      - check:lint:typescript
 
   fix:lint:
     desc: apply automated fixes for linting issues where possible (supports list of files as argument)
     deps:
       - fix:lint:markdown
+      - fix:lint:typescript
+
+  check:lint:typescript:
+    desc: check TypeScript files for semantic rules (supports list of files as argument)
+    internal: true
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.(ts|tsx)$" .FILES -1 | join " " }}'
+      ALL_FILES: "{{ .ROOT_DIR }}/**/*.{ts,tsx}"
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: oxlint {{ .CLI_ARGS | default "." }}
+
+  fix:lint:typescript:
+    desc: apply automated fixes for linting issues for TypeScript files where possible (supports list of files as argument)
+    internal: true
+    deps: [setup:development-environment]
+    vars:
+      FILES: '{{ .CLI_ARGS_LIST | join "\n" }}'
+      FILTERED_FILES: '{{ regexFindAll "(?m)^.*\\.(ts|tsx)$" .FILES -1 | join " " }}'
+      ALL_FILES: "{{ .ROOT_DIR }}/**/*.{ts,tsx}"
+    if: "{{ empty .FILES | or (not (empty .FILTERED_FILES)) }}"
+    cmd: oxlint --fix --fix-suggestions {{ .CLI_ARGS | default "." }}
 
   check:lint:markdown:
     desc: check Markdown files for semantic rules (supports list of files as argument)
