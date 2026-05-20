@@ -14,7 +14,8 @@ Kompla
 Kommunikationsplattform
 -kommunikationsplattform
 Thore
-Berndhard
+Gurusinga
+Bernhard
 Struckrad
 Nygard
 Drews
@@ -62,3 +63,6 @@ irrepresentable
 Mandantengeheimnis
 PDFs
 datatypes
+Governikus
+xdomea
+XRepository
