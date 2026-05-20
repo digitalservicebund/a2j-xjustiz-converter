@@ -1,7 +1,7 @@
 ---
 status: accepted
 date: 2026-04-13
-decision-makers: Thore Straßburg, Kai Berndhard, Flo Drews, Manuel von Struckrad
+decision-makers: Thore Straßburg, Kai Bernhard, Flo Drews, Manuel von Struckrad
 informed: the whole Access to Justice project
 ---
 
