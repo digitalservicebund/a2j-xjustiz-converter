@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: approved
 date: 2026-05-15
 ---
 
