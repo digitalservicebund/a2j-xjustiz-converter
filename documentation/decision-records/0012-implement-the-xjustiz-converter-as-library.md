@@ -1,6 +1,8 @@
 ---
 status: accepted
 date: 2026-04-20
+decision-makers: Thore Straßburg
+consulted: Kai Bernhard, Flo Drews, Pram Gurusinga
 ---
 
 # Implement the XJustiz-Converter as Library
