@@ -76,3 +76,4 @@ Zahlungsklage
 Structurizr
 [Dd]ependabot
 worktree
+[Pp]npm
