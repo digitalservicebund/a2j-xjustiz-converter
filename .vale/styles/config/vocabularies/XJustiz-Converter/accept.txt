@@ -19,6 +19,8 @@ Bernhard
 Struckrad
 Nygard
 Drews
+Niko
+Felger
 toolchain
 modulith
 onboarding
@@ -69,3 +71,5 @@ XRepository
 Zahlungsklage
 [Mm]etatypes?
 Structurizr
+[Dd]ependabot
+worktree
