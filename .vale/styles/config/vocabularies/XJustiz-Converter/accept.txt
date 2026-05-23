@@ -78,3 +78,11 @@ Structurizr
 worktree
 [Pp]npm
 [Cc]orepack
+bundler
+[Tt]sdown
+[Tt]sup
+Rolldown
+Rollup
+OXC
+Unplugin
+deduplication
