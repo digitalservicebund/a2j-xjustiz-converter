@@ -52,6 +52,14 @@ tasks:
     sources: [lefthook.yaml]
     cmd: lefthook install
 
+  setup:runtime-dependencies:
+    desc: set up development work with runtime dependencies for NodeJS
+    internal: true
+    deps: [setup:development-environment]
+    sources: [./package/pnpm-lock.yaml]
+    dir: ./package
+    cmd: pnpm install
+
   setup:vale:
     desc: set up Vale by syncing/downloading configured style packages
     internal: true
@@ -64,6 +72,7 @@ tasks:
     desc: check for integrity of the codebase (supports list of files as argument)
     deps:
       - check:format
+      - check:types-in-code
       - check:lint
       - check:spell-and-style
       - check:link-validity
@@ -94,6 +103,12 @@ tasks:
       --ignore-unknown --no-error-on-unmatched-pattern
       --log-level warn
       {{ .CLI_ARGS | default .ALL_PROJECT_FILES  }}
+
+  check:types-in-code:
+    desc: check that all types in the code are correct according to the TypeScript compiler
+    deps: [setup:runtime-dependencies]
+    dir: ./package
+    cmd: pnpm exec tsc --noEmit
 
   check:lint:
     desc: check for semantic rules (supports list of files as argument)

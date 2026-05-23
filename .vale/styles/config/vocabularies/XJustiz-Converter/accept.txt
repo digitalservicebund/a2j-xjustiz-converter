@@ -77,3 +77,4 @@ Structurizr
 [Dd]ependabot
 worktree
 [Pp]npm
+[Cc]orepack

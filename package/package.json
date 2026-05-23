@@ -1,0 +1,16 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "name": "@digitalservicebund/a2j-xjustiz-converter",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "packageManager": "pnpm@11.2.2",
+  "engineStrict": true,
+  "engines": {
+    "node": "24.12.0",
+    "pnpm": "11.2.2"
+  },
+  "dependencies": {
+    "typescript": "^6.0.3"
+  }
+}
