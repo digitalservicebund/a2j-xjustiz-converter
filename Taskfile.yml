@@ -205,6 +205,16 @@ tasks:
     dir: ./package
     cmd: pnpm exec tsdown
 
+  publish:
+    desc: publish the library to the NPM package registry
+    summary: publishing requires OpenID Connect authentication and is expected to run in an authorized environment
+    deps: [build]
+    dir: ./package
+    cmds:
+      - cp ../LICENSE ./LICENSE
+      - defer: rm --force ./LICENSE
+      - pnpm publish
+
   verify:staged-changes:
     desc: verify list of staged files including automated fixes to be staged (requires list of staged files as argument)
     aliases: ["pre-commit"]
