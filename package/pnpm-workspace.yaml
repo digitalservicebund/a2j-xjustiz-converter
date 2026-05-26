@@ -1,3 +1,5 @@
 # $schema: https://www.schemastore.org/pnpm-workspace.json
 preferFrozenLockfile: true
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - tinyexec # known false positive - actually uses stronger provenance attestation
