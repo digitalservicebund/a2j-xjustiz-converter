@@ -213,7 +213,7 @@ tasks:
     cmds:
       - cp ../LICENSE ./LICENSE
       - defer: rm --force ./LICENSE
-      - pnpm publish
+      - pnpm publish --no-git-checks
 
   verify:staged-changes:
     desc: verify list of staged files including automated fixes to be staged (requires list of staged files as argument)
