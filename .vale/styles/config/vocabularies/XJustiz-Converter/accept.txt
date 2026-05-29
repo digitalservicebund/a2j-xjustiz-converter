@@ -86,3 +86,4 @@ Rollup
 OXC
 Unplugin
 deduplication
+[Tt]ranspilation
