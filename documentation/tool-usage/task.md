@@ -3,16 +3,17 @@
 [Related Decision Record](../decision-records/0009-orchestrate-workflows-centrally-with-task.md)
 
 [Task](https://github.com/go-task/task) (also called `go-task` or `Taskfile`) is
-the central workflow orchestrator for the repository. It provides workflows that
-can be used for local development, checking code into the version control
-system, continuously integration pipelines, releases, and deployments. Running
-static code analysis tools and scanner, executing tests, building applications,
-generating artifacts, and publishing releases.
+the central workflow orchestrator of the repository. It provides tasks and
+workflows that can be used for local development, to check in code into the
+version control system, for continuously integration pipelines, releases, and
+deployments. Workflows run static code analysis tools and scanner, execute
+tests, build applications, generate artifacts, and publish releases.
 
-For example, fixing structurally format a single file in a code editor, fixing
-the format of a list of staged files on the command-line, and verifying the
-correct formatting of the whole codebase within a continuous integration
-pipeline. The whole lifecycle.
+The orchestrator is meant to cover the full operation cycle. For example, to fix
+the structural formatting of files. It works for of a single file from inside
+a code editor, for a list of staged files from the command-line, and to verify
+the correct formatting of the whole codebase within a continuous integration
+pipeline.
 
 Other infrastructure tools like git hook managers or continuous integration
 services must use these workflows. In consequences they become more focused on
@@ -24,21 +25,22 @@ compatibilities - heavily reducing "works on my machine" scenarios.
 
 ## Usage
 
-Task will be automatically available via the [development environment](./devbox.md)
-and should be used in conjunction with it. Running `task --list` will provide
-on overview of available tasks and their respective description to run. For
-example: `task check:format`.
+Task is automatically available within the [development environment](./devbox.md)
+and should be used in conjunction with it. Running `task --list` will provide an
+overview of available tasks and their descriptions. For example: `task
+check:format`.
 
-It is most convenient to use Task with autocompletion on the command-line,
-because tasks can be discovered and run quicker. Therefore, Task provides the
-`task --completion <some_shell>` command. Depending on the local developer
-setup, this can be as trivial as sourcing it into the shell, for example like
-`source <(task --completion zsh)`. There are also installable extensions for
-popular code editors.
+It is most convenient to use Task with autocompletion on the command-line. This
+way, tasks can be discovered and run quicker. Therefore, Task provides the `task
+--completion <some_shell>` command. Depending on the individual local setup,
+this can be just sourced into the shell, for example like `source <(task
+--completion zsh)`. There are also extensions for popular code editors that can
+be installed.
 
-Some tasks and workflows support to provide a list of files as argument to limit
-their radius of action, for example: `task fix -- README.md Taskfile.yml`. Task
-should indicate in their description if they support files as argument.
+Some tasks support a list of files as argument, to limit their radius of their
+action. Like formatting only given set of files instead of the whole codebase.
+For example: `task fix -- README.md Taskfile.yml`. Tasks should indicate by their
+description if they support such a file list argument.
 
 Tasks should include their required setup automatically. So any workflow can be
 called without implicit preconditions. For example, runtime dependencies will be
@@ -54,21 +56,23 @@ concept, describing tasks that compose a bunch of other tasks.
 ## Task Taxonomy and Scopes
 
 To maintain a predictable and self-documenting CLI experience, all tasks are
-categorized and grouped into a hierarchy of scopes. Tasks are named by the chain
-of scopes, for example `scope-a:scope-b:scope-c`. While `scope-b` is a sub-scope
-of `scope-a` and `scope-c` is a sub-scope of `scope-b`. Practical examples would
-be `check:format` or `fix:format`. Sometimes, the final scope is just the name
-of the tool that is run in this task, like `check:format:prettier`. Each scope
-can be run individually. So running `check` will run any sub-scope of it in
-parallel. In turn `check:format` will only run all sub-scopes of itself again.
-This are implicitly lightweight workflows.
+categorized and grouped into a hierarchy of scopes. Tasks are named by their
+chain of scopes, for example `scope-a:scope-b:scope-c`. While `scope-b` is
+a sub-scope of `scope-a` and `scope-c` is a sub-scope of `scope-b`. Practical
+examples would be `check:format` or `fix:format`. Sometimes, the final scope is
+just the name of the tool that is run by this task, like
+`check:format:prettier`. Each scope can be run individually. So running `check`
+will run any sub-scope task of itself in parallel. In turn also `check:format`
+will run only run sub-scoped tasks of itself. These are implicit, lightweight
+workflows.
 
-The full task name should read as imperative commands, starting with a verb
+The full task name should read as imperative command, starting with a verb
 followed by a noun like `check:format` or `fix:format`. Developers should be
 able to guess the impact of a task based on the naming (e.g. read-only `check`
-versus modifying `fix`). Tool names should be excluded or only used as last
-the last scope if necessary to manage complexity. Such tasks should usually be
-marked as `internal: true` to keep the list of tasks
+versus modifying `fix`). Tool names should be excluded. They might only be used
+as last the last scope if it becomes necessary to manage complexity. Such tasks
+should usually be marked as `internal: true` to keep the list of suggested tasks
+short.
 
 The tiered hierarchy of scopes looks like the following:
 
