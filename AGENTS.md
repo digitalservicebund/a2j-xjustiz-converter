@@ -5,4 +5,5 @@ allows for progressively disclosure of relevant information. The anchor for
 everything is the root [README](./README.md). It provides the base context and
 links to further documentation. Especially the
 [documentation](./README.md#documentation) section provides a good overview where
-to find what kind of information.
+to find what kind of information. Try to follow links directly for progressive
+disclosure, instead of directly searching for files by yourself.
