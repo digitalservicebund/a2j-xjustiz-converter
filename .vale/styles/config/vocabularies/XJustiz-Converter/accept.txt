@@ -87,4 +87,4 @@ OXC
 Unplugin
 deduplication
 [Tt]ranspilation
-Vitest
+[Vv]itest
