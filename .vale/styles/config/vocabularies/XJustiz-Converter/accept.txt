@@ -87,3 +87,4 @@ OXC
 Unplugin
 deduplication
 [Tt]ranspilation
+Vitest
