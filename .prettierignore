@@ -1,7 +1,4 @@
 # Lock files don't required formatting.
 devbox.lock
 
-# Keep original copy by MADR untouched.
-documentation/decision-records/template.md
-
 package/pnpm-lock.yaml
