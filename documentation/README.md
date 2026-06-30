@@ -8,4 +8,6 @@ in the root directory of the repository, as listed in the respective
 Most prominently, it includes the [product requirement document](./product-requirements.md).
 Our [decision records](./decision-records) document big and small decisions and
 their underlying research. There is also documentation how our
-[tool usage](./tool-usage/) and related conventions.
+[tool usage](./tool-usage/) and related conventions. For the active development
+on the codebase, we document recurring [implementation pattern](./patterns) as
+well.

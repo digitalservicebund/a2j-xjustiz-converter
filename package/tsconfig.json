@@ -16,6 +16,9 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
-    "types": ["vitest/importMeta"]
+    "types": ["vitest/importMeta"],
+    "paths": {
+      "~/*": ["./src/*"]
+    }
   }
 }
