@@ -1,8 +1,14 @@
-import type { DatatypeA } from "~/xjustiz-schemata/din-91379/datatypeA";
-import type { DatatypeB } from "~/xjustiz-schemata/din-91379/datatypeB";
+import {
+  type DatatypeA,
+  datatypeA,
+} from "~/xjustiz-schemata/din-91379/datatypeA";
+import {
+  type DatatypeB,
+  datatypeB,
+} from "~/xjustiz-schemata/din-91379/datatypeB";
 
 /**
- * Message orchestrator to compose a _Zahlungsklage_.
+ * Message orchestrator to compose a Nachricht for a _Zahlungsklage_.
  *
  * This message type is based on the XJustiz KLAVER module, using the generic
  * message type `nachricht.klaver.klageverfahren.3500001` with the
@@ -16,4 +22,4 @@ export function zahlungsklage(name: DatatypeA, addresse: DatatypeB): string {
   return `<nachricht.klaver.klageverfahren.3500001>Name: ${name}; Addresse: ${addresse}</<nachricht.klaver.klageverfahren.3500001>`;
 }
 
-export type { DatatypeA, DatatypeB };
+export { type DatatypeA, datatypeA, type DatatypeB, datatypeB };

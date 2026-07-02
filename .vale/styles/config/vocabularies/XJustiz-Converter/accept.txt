@@ -93,3 +93,5 @@ TSDoc
 [Uu]nary
 romanizing
 Koordinierungsstelle
+unrepresentable
+Hook
