@@ -94,3 +94,40 @@ There are various other scenarios where is desirable to provide descriptive type
 errors. The actual shapes can vary for the respective use cases. At their core,
 they should be communicative to improve the developer experience. Literal
 strings are the shared puzzle piece.
+
+## Intentionally Curate Order in Files Top to Down
+
+The order of the content in a file has an impact on the reader. This is equally
+true for source code modules as well as many other kinds of files. Especially
+for code, the most important elements should be at the top. In best case,
+the primary export(s) are at the beginning of a file, because this is what the
+module is about. A reader who opens the file should start here as proper entry
+point to the module. Implementation details and supporting elements should be
+placed further down, creating an almost linear reading flow where possible.
+This is a subjective human process, manually improving the readability of code.
+However, there are also some exceptions. For example, there are scenarios where
+the compiler or runtime enforces a certain order. Though, it is sometimes
+possible to use creative ways that maintain a better ordering. In-source tests
+are always expected at the end of a file after the implementation.
+
+For example, when a function is composed of multiple nested functions, the top
+level function should come first followed by lower level functions. There is no
+strict rule for "walking the call graph". Like there is no strong opinion for
+a depth- or breadth-first approach. Extracted constant values should be placed
+close to where they are used, preferably below related functions if it doesn't
+hurt the readability. The same goes for types or other language constructs. The
+ordering rules for compositions remain.
+
+## Testing
+
+### In-Source Tests
+
+We believe in the importance of maintaining a high cohesion between tests and
+their implementation. Therefore, we keep unit tests as in-source tests in the
+respective module of the unit. Good written test cases can act as supportive
+documentation in a module for developers working on it.
+
+To keep modules with in-source tests clean, we don't mix test related imports
+with those used at production runtime. Therefore, we use asynchronous import
+calls inside the behavioral description block of the in-source tests. Exception
+are type imports, which can't be important dynamically at runtime.
