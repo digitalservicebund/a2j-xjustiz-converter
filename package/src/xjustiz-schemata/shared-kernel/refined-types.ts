@@ -86,7 +86,7 @@ export function isString(value: unknown): value is string {
 }
 
 /**
- * A factory for a refined types is a function object to construct valid
+ * A factory for a refined type is a function object to construct valid
  * instances by parsing input values. Each factory is also compatible with the
  * Standard Schema specification and can be used directly as schema by itself.
  *
@@ -117,7 +117,7 @@ export function isString(value: unknown): value is string {
  * While every parse function must support runtime parsing, it is possible to
  * define additional compile-time parsing as well (see {@link LiteralAwareResult}).
  */
-type RefinedTypeFactory<
+export type RefinedTypeFactory<
   Input,
   Output extends DeepReadonly<Input>,
   ParseInput extends { (input: Input): Result<Output> },

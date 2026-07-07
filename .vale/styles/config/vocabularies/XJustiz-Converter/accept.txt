@@ -88,3 +88,6 @@ Unplugin
 deduplication
 [Tt]ranspilation
 [Vv]itest
+TSDoc
+[Gg]rapheme
+[Uu]nary

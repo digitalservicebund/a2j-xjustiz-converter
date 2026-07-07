@@ -3,5 +3,8 @@
   "plugins": ["typescript", "unicorn", "oxc"],
   "categories": {
     "correctness": "error"
+  },
+  "options": {
+    "reportUnusedDisableDirectives": "error"
   }
 }
