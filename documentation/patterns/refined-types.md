@@ -66,6 +66,9 @@ the compiler that an input is a valid instance via its parsing functions. This
 convention can't be assured by code but **must be ensured by developers**!
 A custom linting rule can help to better enforce this.
 
+The type should be documented to improve the developer experience to support
+directly in the IDE where an instance is expected.
+
 Following the design principle of descriptive type errors, an example branding
 for a plain string looks like this:
 
@@ -74,6 +77,11 @@ for a plain string looks like this:
 ```typescript
 declare const TAG: unique symbol;
 
+/**
+ * Unique identifier part for web addresses.
+ *
+ * Valid slugs are nonempty strings without whitespace characters.
+ */
 export type Slug = string & {
   readonly [TAG]: "Use the slug() factory function to construct valid instances.";
 };
@@ -218,11 +226,26 @@ the parsed `value` property of an actual failure result.
 ### Shared Factory Implementation
 
 A refined type will be wrapped up by creating a factory instance that ensures
-certain requirements on the type level and reduces boilerplate code.
+certain requirements on the type level and reduces boilerplate code. This is
+based on the [canonical implementation of the pattern](../../package/src/xjustiz-schemata/shared-kernel/refined-types.ts),
+which can be also used as root to discover existing refined type implementations
+to learn from.
+
+The factory should include documentation how well compile-time parsing is
+supported. This is especially relevant when only partial support is implemented.
+The related refined type (here `Slug`) should in best case reference to its
+related factory instance for improved developer experience.
 
 `slug.ts`:
 
 ```typescript
+/**
+ * Factory function object for the {@link Slug} refined type. See
+ * {@link RefinedTypeFactory} for further details, usage examples and
+ * customization.
+ *
+ * Support for full compile-time parsing of static string literals.
+ */
 export const slug = defineRefinedType(isString, parseSlug);
 ```
 
@@ -275,3 +298,9 @@ strictly talk about "parsing". Which could be paraphrased as validating once and
 then maintaining the invariants through a read-only tagged type constant. So the
 `Input` and `Output` type are not the same, properly expressed on the schema.
 Inputs get transformed into outputs - valid scalar values.
+
+### Testing
+
+Refined types should be covered by plain unit tests. The runtime and
+compile-time parsing must be reasonably well tested for valid and invalid
+inputs. Property based testing can be taken for support where actually helpful.

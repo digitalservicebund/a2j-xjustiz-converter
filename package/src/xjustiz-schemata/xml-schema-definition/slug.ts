@@ -3,6 +3,7 @@ import {
   defineRefinedType,
   isString,
   type Result,
+  type RefinedTypeFactory, // oxlint-disable-line no-unused-vars -- referenced by TSDoc
   type LiteralAwareResult,
   type FailureResult,
   type SuccessResult,
@@ -11,11 +12,14 @@ import {
 
 declare const TAG: unique symbol;
 
+/**
+ * Unique identifier part for web addresses.
+ * Valid slugs are nonempty strings without whitespace characters.
+ * See the related {@link slug | refined type factory}.
+ */
 export type Slug = string & {
   readonly [TAG]: "Use the slug() factory function to construct valid instances.";
 };
-
-export const slug = defineRefinedType(isString, parseSlug);
 
 function parseSlug(issueMessages: SlugIssueMessages = DEFAULT_ISSUE_MESSAGES) {
   return function parse(input: string): Result<Slug> {
@@ -55,3 +59,12 @@ type ParseSlug<Value extends string> =
       : Value extends `${string} ${string}`
         ? FailureResult<"Slugs must contain no whitespace characters">
         : SuccessResult<Slug>;
+
+/**
+ * Factory function object for the {@link Slug} refined type. See
+ * {@link RefinedTypeFactory} for further details, usage examples and
+ * customization.
+ *
+ * Support for full compile-time parsing of static string literals.
+ */
+export const slug = defineRefinedType(isString, parseSlug);
