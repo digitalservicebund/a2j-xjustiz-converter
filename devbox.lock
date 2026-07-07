@@ -709,6 +709,54 @@
           "store_path": "/nix/store/j3gnlb01ab72lia0qsqqq401nvk9bmfk-vale-3.14.1"
         }
       }
+    },
+    "vscode-js-debug@1.117.0": {
+      "last_modified": "2026-06-27T07:37:20Z",
+      "resolved": "github:NixOS/nixpkgs/3d46470bb3030020f7e1361f33514854f5bfa86d#vscode-js-debug",
+      "source": "devbox-search",
+      "version": "1.117.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qx5zq0h4d2ngvbaz75vaq0wyr2j1k3gq-vscode-js-debug-1.117.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qx5zq0h4d2ngvbaz75vaq0wyr2j1k3gq-vscode-js-debug-1.117.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5wfgkma77lizz0dxcdrf5nc4bymdr8rw-vscode-js-debug-1.117.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/5wfgkma77lizz0dxcdrf5nc4bymdr8rw-vscode-js-debug-1.117.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/l5gincbb9g7mqzx5jdf2g9vljqwci99k-vscode-js-debug-1.117.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/l5gincbb9g7mqzx5jdf2g9vljqwci99k-vscode-js-debug-1.117.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/27q56sak3bmz6rjjmbgc9nyfv7vwibdy-vscode-js-debug-1.117.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/27q56sak3bmz6rjjmbgc9nyfv7vwibdy-vscode-js-debug-1.117.0"
+        }
+      }
     }
   }
 }
