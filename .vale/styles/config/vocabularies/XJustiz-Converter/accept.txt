@@ -91,3 +91,4 @@ deduplication
 TSDoc
 [Gg]rapheme
 [Uu]nary
+romanizing

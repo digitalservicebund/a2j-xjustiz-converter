@@ -4,6 +4,10 @@ import {
   isString,
   type Result,
   type RefinedTypeFactory, // oxlint-disable-line no-unused-vars -- referenced by TSDoc
+  type SuccessResult,
+  type FailureResult,
+  type IsLiteral,
+  type LiteralAwareResult,
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
 
 declare const TAG: unique symbol;
@@ -13,8 +17,8 @@ declare const TAG: unique symbol;
  *
  * Meant to be used for names of natural persons on sovereign official documents.
  * Includes all Latin characters, plus additional non-letters of group N1
- * ("Nicht-Buchstaben N1") that are necessary to represent names for romanized
- * transliterations.
+ * ("Nicht-Buchstaben N1") that are necessary to represent names and for
+ * romanizing transliterations.
  *
  * See the related {@link datatypeA | refined type factory} for construction.
  */
@@ -37,7 +41,9 @@ function parseDatatypeA(
         issues: [{ message: issueMessages.invalidCharacters(characters) }],
       };
     }
-  };
+  } as <Value extends string>(
+    input: Value,
+  ) => LiteralAwareResult<string, Value, ParseDatatypeA<Value>, DatatypeA>;
 }
 
 const DEFAULT_ISSUE_MESSAGES = {
@@ -52,9 +58,36 @@ type DatatypeAIssueMessages = DeepLiteralToPrimitive<
   typeof DEFAULT_ISSUE_MESSAGES
 >;
 
+type ParseDatatypeA<Value extends string> =
+  IsLiteral<Value, string> extends false
+    ? FailureResult<"compile-time parsing only works for static literals">
+    : ConsumeCharacters<Value, CompileTimeParsableCharacters> extends ""
+      ? SuccessResult<DatatypeA>
+      : ConsumeCharacters<
+            Value,
+            CompileTimeParsableCharacters
+          > extends `${infer InvalidCharacter extends GuaranteedInvalidCharacters}${string}`
+        ? FailureResult<`Contains characters not allowed by DIN 91379 Datentyp A: ${InvalidCharacter}`>
+        : Result<DatatypeA>;
+
 /**
- * Factory function object for the {@link DatatypeA} refined type.
- * See {@link RefinedTypeFactory} for further details and usage examples.
+ * Factory function object for the {@link DatatypeA} refined type. See
+ * {@link RefinedTypeFactory} for further details, usage examples and
+ * customization.
+ *
+ * Support for partial compile-time parsing of static string literals. Only a
+ * subset of the full characters set that is tested at runtime is supported. This
+ * covers the full ASCII range for valid and invalid character. For static string
+ * literals with characters outside this range, the result stays undetermined and
+ * compile-time evaluation is necessary.
+ *
+ * @example
+ * ```typescript
+ * datatypeA("Erika Musterfrau").value; // success (compile-time parsing)
+ * datatypeA("Max1 (Friedrich) Mustermann") // failure (compile-time parsing)
+ * const someResult = datatypeA("Íñigo de Loyola"); // undetermined
+ * const otherResult = datatypeA(someDynamicInput); // always undetermined
+ * ```
  */
 export const datatypeA = defineRefinedType(isString, parseDatatypeA);
 
@@ -176,13 +209,42 @@ function transformXsdPatternToJavaScriptExpression(xsdPattern: string): RegExp {
   return new RegExp(javaScriptPattern, "u");
 }
 
+/**
+ * Consumes a string from the start until a character not in the given set is
+ * found. Resolves to the remaining characters, empty if fully consumed.
+ */
+type ConsumeCharacters<
+  Input extends string,
+  SetOfCharactersToConsume extends string,
+> = Input extends `${SetOfCharactersToConsume}${infer Remainder}`
+  ? ConsumeCharacters<Remainder, SetOfCharactersToConsume>
+  : Input;
+
+type CompileTimeParsableCharacters = AsciiCharacter;
+
+type AsciiCharacter =
+  | LowercaseAsciiLetter
+  | UppercaseAsciiLetter
+  | AsciiSymbols;
+
+// prettier-ignore
+type LowercaseAsciiLetter = | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
+
+// prettier-ignore
+type UppercaseAsciiLetter = | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+
+type AsciiSymbols = " " | "'" | "," | "-" | "." | "`" | "~";
+
+// prettier-ignore
+type GuaranteedInvalidCharacters = "!" | '"' | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "/" | "\\" | "]" | "^" | "_" | "{" | "|" | "}";
+
 if (import.meta.vitest) {
-  const { describe, it, test, expect, vi } = import.meta.vitest;
+  const { describe, it, test, expect, expectTypeOf, vi } = import.meta.vitest;
 
   /*
    * We don't try to test the original, copy-pasted pattern throughout, but
    * primarily focus on the implementation as refined type. The pattern
-   * transformation requires special attentions, protected by test.
+   * transformation requires extra attention, protected by test.
    */
   describe("Datatype A", async () => {
     const {
@@ -191,7 +253,7 @@ if (import.meta.vitest) {
       string: arbitraryString,
     } = await import("fast-check");
 
-    describe("parsing", () => {
+    describe("runtime parsing", () => {
       it("is successful for an empty string", () => {
         expect(datatypeA("")).toStrictEqual({ value: "" });
       });
@@ -269,7 +331,7 @@ if (import.meta.vitest) {
         },
       );
 
-      it("always reports at least one invalid character when failing", () =>
+      it("always reports at least one invalid character when failing", () => {
         assert(
           property(arbitraryString({ unit: "grapheme" }), (input) => {
             const result = datatypeA.customize({
@@ -278,7 +340,54 @@ if (import.meta.vitest) {
 
             return result.issues == undefined || result.issues.length >= 1;
           }),
-        ));
+        );
+      });
+    });
+
+    describe("compile-time parsing", () => {
+      it("is predetermined to succeed for an empty string", () => {
+        expectTypeOf(datatypeA("")).toEqualTypeOf<SuccessResult<DatatypeA>>();
+      });
+
+      it("is predetermined to succeed for valid ASCII range of letters and symbols", () => {
+        expectTypeOf(datatypeA("Erika Musterfrau")).toEqualTypeOf<
+          SuccessResult<DatatypeA>
+        >();
+
+        expectTypeOf(datatypeA("Marie-Luise von Braun")).toEqualTypeOf<
+          SuccessResult<DatatypeA>
+        >();
+
+        expectTypeOf(datatypeA(",.'`~")).toEqualTypeOf<
+          SuccessResult<DatatypeA>
+        >();
+      });
+
+      it("is predetermined to fail for a invalid ASCII range symbols", () => {
+        expectTypeOf(datatypeA("1")).toEqualTypeOf<
+          FailureResult<"Contains characters not allowed by DIN 91379 Datentyp A: 1">
+        >();
+
+        expectTypeOf(datatypeA("Max1")).toEqualTypeOf<
+          FailureResult<"Contains characters not allowed by DIN 91379 Datentyp A: 1">
+        >();
+
+        expectTypeOf(datatypeA("a@b!c?")).toEqualTypeOf<
+          FailureResult<"Contains characters not allowed by DIN 91379 Datentyp A: @">
+        >();
+      });
+
+      it("remains undetermined for valid and invalid inputs outside the ASCII range", () => {
+        expectTypeOf(datatypeA("Müller")).toEqualTypeOf<Result<DatatypeA>>();
+        expectTypeOf(datatypeA("יצחק רבין")).toEqualTypeOf<Result<DatatypeA>>();
+      });
+
+      it("remains undetermined for non static string literals", () => {
+        const dynamicInput: string = "anything";
+        expectTypeOf(datatypeA(dynamicInput)).toEqualTypeOf<
+          Result<DatatypeA>
+        >();
+      });
     });
 
     /*
