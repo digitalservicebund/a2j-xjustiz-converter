@@ -41,3 +41,23 @@ type LiteralToPrimitive<Literal> = Literal extends boolean
 type Primitive = string | number | boolean | bigint | symbol | null | undefined;
 
 export type IsAny<MaybeAny> = 0 extends 1 & MaybeAny ? true : false;
+
+/**
+ * Consumes an input string from the start until the first character is found
+ * that is not included in the set of characters to consume. Resolves to the
+ * remaining string, empty if fully consumed.
+ *
+ * @example
+ * ```typescript
+ * ConsumeCharactersFrom<"abcde", "ade"> // "acde"
+ * ConsumeCharactersFrom<"abcde", "acb"> // "de"
+ * ConsumeCharactersFrom<"abcde", ""> // "abcde"
+ * ConsumeCharactersFrom<"abcde", "edcba"> // ""
+ * ```
+ */
+export type ConsumeCharactersFrom<
+  Input extends string,
+  SetOfCharactersToConsume extends string,
+> = Input extends `${SetOfCharactersToConsume}${infer Rest}`
+  ? ConsumeCharactersFrom<Rest, SetOfCharactersToConsume>
+  : Input;
