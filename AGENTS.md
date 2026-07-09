@@ -11,3 +11,5 @@ disclosure, instead of directly searching for files by yourself.
 When writing program code, follow especially the [design
 principles](./DESIGN_PRINCIPLES.md), mind the [architecture](./ARCHITECTURE.md)
 and watch out for [implementation patterns](./documentation/patterns/README.md).
+Check out how to run tools for working with the repository, starting of with the
+[central workflow orchestrator](./documentation/tool-usage/task.md).
