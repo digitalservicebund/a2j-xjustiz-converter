@@ -44,7 +44,10 @@ function parseDatatypeA(
     if (DATATYPE_A_PATTERN.test(composedUnicodeInput)) {
       return { value: composedUnicodeInput as unknown as DatatypeA };
     } else {
-      const characters = findInvalidCharacters(input, DATATYPE_A_PATTERN);
+      const characters = findInvalidCharacters(
+        composedUnicodeInput,
+        DATATYPE_A_PATTERN,
+      );
 
       return {
         issues: [{ message: issueMessages.invalidCharacters(characters) }],

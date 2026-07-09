@@ -7,17 +7,22 @@
  * This function interprets characters as linguistic graphemes. The given regular
  * expression for the `allowedCharacters` **MUST** be so defined that is works
  * when applied to a single grapheme, as it will be evaluated per segmented
- * grapheme. Regular expressions **MUST** be also written to match against
- * inputs in composed Unicode format, because inputs will always be normalized to
- * the composed format.
- * All patterns by the **DIN SPEC 91379 datatypes** suit these requirements.
+ * grapheme. All patterns by the **DIN SPEC 91379 datatypes** suit these
+ * requirements.
+ *
+ * **WARNING:**
+ * Make sure to match Unicode formats between the input and the regular
+ * expression. That means, if the regular expression is defined using the
+ * composed or decomposed Unicode format, the input string must also match that.
+ * This can be done using the {@link String.prototype.normalize} function with
+ * the respectively matching format as argument.
  */
 export function findInvalidCharacters(
   input: string,
   allowedCharacters: RegExp,
 ): Set<string> {
   return new Set(
-    segmentUnicodeIntoLinguisticGraphemes(input.normalize("NFC")).filter(
+    segmentUnicodeIntoLinguisticGraphemes(input).filter(
       (grapheme) => !allowedCharacters.test(grapheme),
     ),
   );
