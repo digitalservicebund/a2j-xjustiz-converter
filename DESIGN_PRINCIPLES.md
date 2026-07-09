@@ -45,6 +45,16 @@ Therefore, German is used directly for any terminology of the domain, embedded
 in a technical frame of English code and documentation. See also [decision record 0002](./documentation/decision-records/0002-use-german-for-the-domain-and-english-for-technical-code.md)
 for more details and conventions.
 
+## Schema References for JSON Files
+
+Any JSON file in the repository that follows a schema must reference it, using
+the top level `$schema` property. This provides various benefits like
+validation, autocompletion, documentation hints etc. Unfortunately, there is no
+proper static analysis tool that could be added to our quality assurance to
+validate JSON files by their schema.
+
+Note that there is no proper standard to reference schemas in YAML files.
+
 ## Type-Driven Development
 
 We use the type system to express intent. Domain concepts, constraints, and
