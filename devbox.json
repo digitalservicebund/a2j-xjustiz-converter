@@ -2,7 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.17.1/.schema/devbox.schema.json",
   "packages": [
     "git@2.53.0",
-    "devbox@0.17.1",
     "prettier@3.6.2",
     "markdownlint-cli2@0.21.0",
     "vale@3.14.1",
@@ -14,7 +13,8 @@
     "actionlint@1.7.12",
     "oxlint@1.63.0",
     "nodejs@24.12.0",
-    "vscode-js-debug@1.117.0"
+    "vscode-js-debug@1.117.0",
+    "devbox@0.17.5"
   ],
   "env": {
     "DEVBOX_COREPACK_ENABLED": "true"

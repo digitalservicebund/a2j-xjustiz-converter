@@ -121,51 +121,51 @@
         }
       }
     },
-    "devbox@0.17.1": {
-      "last_modified": "2026-04-16T08:46:55Z",
-      "resolved": "github:NixOS/nixpkgs/b86751bc4085f48661017fa226dee99fab6c651b#devbox",
+    "devbox@0.17.5": {
+      "last_modified": "2026-06-27T07:37:20Z",
+      "resolved": "github:NixOS/nixpkgs/3d46470bb3030020f7e1361f33514854f5bfa86d#devbox",
       "source": "devbox-search",
-      "version": "0.17.1",
+      "version": "0.17.5",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/56mrf9iasb2b970dfbs709ikvxl8p1a9-devbox-0.17.1",
+              "path": "/nix/store/n3rvsdigi3rkzl8sj1sag8hyvbh69vbg-devbox-0.17.5",
               "default": true
             }
           ],
-          "store_path": "/nix/store/56mrf9iasb2b970dfbs709ikvxl8p1a9-devbox-0.17.1"
+          "store_path": "/nix/store/n3rvsdigi3rkzl8sj1sag8hyvbh69vbg-devbox-0.17.5"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/1ais5h5gph05rqjhhnhf04lcyffgmfwj-devbox-0.17.1",
+              "path": "/nix/store/77i4xnfrh1w1d0wcrqm1fp64f9r34xnb-devbox-0.17.5",
               "default": true
             }
           ],
-          "store_path": "/nix/store/1ais5h5gph05rqjhhnhf04lcyffgmfwj-devbox-0.17.1"
+          "store_path": "/nix/store/77i4xnfrh1w1d0wcrqm1fp64f9r34xnb-devbox-0.17.5"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/p1imny85wmlh1nj5y78lb2sf2dsbq2hi-devbox-0.17.1",
+              "path": "/nix/store/dyijh1gvl63ng9wkbhrafg1r7q44cs4b-devbox-0.17.5",
               "default": true
             }
           ],
-          "store_path": "/nix/store/p1imny85wmlh1nj5y78lb2sf2dsbq2hi-devbox-0.17.1"
+          "store_path": "/nix/store/dyijh1gvl63ng9wkbhrafg1r7q44cs4b-devbox-0.17.5"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/fg2y0h1mv2qjgf8np71gypwn7zngfd1l-devbox-0.17.1",
+              "path": "/nix/store/qka9ljhhyz9j1zsf7qgarfps1dwqhdcy-devbox-0.17.5",
               "default": true
             }
           ],
-          "store_path": "/nix/store/fg2y0h1mv2qjgf8np71gypwn7zngfd1l-devbox-0.17.1"
+          "store_path": "/nix/store/qka9ljhhyz9j1zsf7qgarfps1dwqhdcy-devbox-0.17.5"
         }
       }
     },
