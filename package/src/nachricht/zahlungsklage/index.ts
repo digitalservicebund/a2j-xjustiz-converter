@@ -1,3 +1,19 @@
-export function zahlungsklage(streitwert: number): string {
-  return `<nachricht.klaver.klageverfahren.3500001>${streitwert}</<nachricht.klaver.klageverfahren.3500001>`;
+import type { DatatypeA } from "~/xjustiz-schemata/din-91379/datatypeA";
+import type { DatatypeB } from "~/xjustiz-schemata/din-91379/datatypeB";
+
+/**
+ * Message orchestrator to compose a _Zahlungsklage_.
+ *
+ * This message type is based on the XJustiz KLAVER module, using the generic
+ * message type `nachricht.klaver.klageverfahren.3500001` with the
+ * specialization of an `anderes Klageverfahren`.
+ *
+ * **ATTENTION:**
+ * This is still under construction. It acts as exemplary entry point, without
+ * producing a valid message.
+ */
+export function zahlungsklage(name: DatatypeA, addresse: DatatypeB): string {
+  return `<nachricht.klaver.klageverfahren.3500001>Name: ${name}; Addresse: ${addresse}</<nachricht.klaver.klageverfahren.3500001>`;
 }
+
+export type { DatatypeA, DatatypeB };
