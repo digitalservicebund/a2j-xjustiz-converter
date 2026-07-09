@@ -8,6 +8,14 @@
 
 Oxlint is wired into `task check:lint` and `task fix:lint`. The internal leaf tasks `check:lint:typescript` and `fix:lint:typescript` keep the public task surface aligned with the repository task taxonomy.
 
+## Configuration as JSON Not TypeScript
+
+Oxlint supports plain JSON files for configuration. It also supports the common
+approach of having a `*.config.ts` file, using an ECMAScript with TypeScript.
+Because we install Oxlint via our reproducible development environment, we must
+use JSON. The TypeScript version is only properly supported when installed as
+NodeJS module for a package.
+
 ## Let Oxlint Discover Files
 
 For repository-wide runs, Task invokes Oxlint on `.` and lets Oxlint discover matching files. When a file list is provided on the command-line, Task only routes the TypeScript linting task when the list contains `.ts` or `.tsx` files.
