@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.schemastore.org/package.json",
   "name": "@digitalservicebund/a2j-xjustiz-converter",
-  "version": "0.1.0",
-  "description": "Convert user form data into valid XJustiz messages",
+  "version": "0.2.0",
+  "description": "Assisted composition of XJustiz messages that are ensured to be valid.",
   "author": "Team Court Communication (Access to Justice) - DigitalService GmbH des Bundes",
   "license": "MIT",
   "repository": {
