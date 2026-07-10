@@ -81,22 +81,13 @@ also strip down plenty of not relevant aspects for the targeted use case.
 
 ### From Scalars to Full Messages
 
-On a high level, a message is just an XML document. A tree of structured data
-along the schema specification of the standard. The leaves of this document, the
-single data fields, are called scalars. The composition of a message is
-therefore divided roughly into two phases: constructing valid scalars and
-putting them together into a structurally coherent message.
-
-Scalars come in different kinds and shapes. Some are represented as plain
-enumerations that can be picked from straightforwardly. Others, depending on
-more dynamic inputs, must be parsed/validated and are therefore represented as
-refined types. Again others are used as identifiers, linking entities within and
-across messages. The necessary scalars are determined by the message profile.
-
-The structural composition is done via the message orchestrators. Each message
-profile has a dedicated orchestrator. An orchestrator enforces internal
-invariants, controls unique identifier constraints, allows for secure
-references, and more.
+After all, a message is a structured XML document following a schema
+specification. The data fields at the leaves of such a document are called
+scalars. Scalars come in various different kinds and shapes, from plain
+enumerations to smart refined types. Using message orchestrators, scalars get
+composed into full messages. The orchestrator ensure structural invariants,
+control unique identifier constraints, and allow for secure references within
+the document.
 
 ### Refined Types and Input Validation
 
@@ -142,7 +133,7 @@ import {
   datatypeB, // refined type factory of DatatypeB
 } from "@digitalservicebund/a2j-xjustiz-converter/nachricht/zahlungsklage";
 
-const User = z.object({ 
+const User = z.object({
   name: datatypeA,
   address: z.object({
     street: datatypeB,
@@ -151,15 +142,14 @@ const User = z.object({
 });
 
 const user = User.parse(someInput);
-user.name // <-- branded instance of DatatypeA
-user.address.street // <-- branded instance of DatatypeB
+user.name; // <-- branded instance of DatatypeA
+user.address.street; // <-- branded instance of DatatypeB
 
 // Ready to be used with message orchestrators ...
 ```
 
-Another example would be the [React Hook Form](https://react-hook-form.com)
-library, using the `standardSchemaResolver` and `InferInput` to create a web
-form with full validation and output branding.
+Another example would be the [RVF](https://www.rvf-js.io) (Remix Validated Form)
+library which supports the Standard Schemas out-of-the-box.
 
 ##### Using the Parsing Function Directly
 
@@ -175,7 +165,8 @@ import {
 
 const result = datatypeA(someInput);
 
-if (!result.issues) console.log(`Successfully constructed value: ${result.value}`);
+if (!result.issues)
+  console.log(`Successfully constructed value: ${result.value}`);
 else console.log(`Failed with issues: ${JSON.stringify(result.issues)}`);
 ```
 
@@ -189,11 +180,23 @@ handling of the result at runtime, because the compiler ensures direct value
 access is safe. Note that at runtime, the parse logic will always run, attesting
 the invariants.
 
+**On Success:** The compiler allows direct, safe access on `.value`
+
 ```typescript
-const name = datatypeA("Max").value; // success - compiler allows direct value usage
-datatypeA("Max1!").value; // failure - inaccessible with static issue message
-const someResult = datatypeA("יצחק"); // undetermined - input not supported by compile-time parsing
-const otherResult = datatypeA(someInput); // undetermined - non static, dynamic input
+const name = datatypeA("Max").value; // Safe: Compiler allows direct usage
+```
+
+**On Failure:** The compiler prevents access on `.value` showing an error message
+
+```typescript
+datatypeA("Max1!").value; // Compiler error: Inaccessible with static issue message
+```
+
+**Unsupported Inputs:** The compiler can't parse the input
+
+```typescript
+const someResult = datatypeA("יצחק"); // Undetermined: Input not supported by compile-time parsing
+const otherResult = datatypeA(someInput); // undetermined: Non-static, dynamic input
 ```
 
 In case the compiler predetermines a failure result, it will also report an
@@ -221,7 +224,8 @@ result can be used the same way as the original factory.
 
 ```typescript
 const customDatatypeA = datatypeA.customize({
-  invalidCharacters: (characters) => `Please delete the following characters: ${[...characters].join()}`,
+  invalidCharacters: (characters) =>
+    `Please delete the following characters: ${[...characters].join()}`,
 });
 
 // Use it just as before:

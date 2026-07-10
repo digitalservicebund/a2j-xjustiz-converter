@@ -142,7 +142,7 @@ with those used at production runtime. Therefore, we use asynchronous import
 calls inside the behavioral description block of the in-source tests. Exception
 are type imports, which can't be important dynamically at runtime.
 
-##  Reference Global APIs Explicitly
+## Reference Global APIs Explicitly
 
 To remain flexible and environment agnostic, global APIs like `Intl`, `Crypto`,
 or `Temporal` must be accessed explicitly via the global context object using
