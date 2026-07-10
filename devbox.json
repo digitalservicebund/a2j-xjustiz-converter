@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.17.1/.schema/devbox.schema.json",
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/refs/tags/0.17.5/.schema/devbox.schema.json",
   "packages": [
     "git@2.53.0",
     "prettier@3.6.2",
