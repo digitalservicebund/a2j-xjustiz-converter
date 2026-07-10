@@ -49,7 +49,7 @@ export function findInvalidCharacters(
  */
 function segmentUnicodeIntoLinguisticGraphemes(text: string): string[] {
   const unicodeGraphemeClusters = Array.from(
-    new Intl.Segmenter(UNDETERMINED_LOCALE, {
+    new globalThis.Intl.Segmenter(UNDETERMINED_LOCALE, {
       granularity: "grapheme",
     }).segment(text),
     (segment) => segment.segment,
