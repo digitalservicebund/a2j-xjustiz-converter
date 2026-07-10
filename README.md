@@ -45,8 +45,10 @@ the [architecture documentation](./documentation/architecture/README.md) to get
 a high level view, where the XJustiz-Converter fits in the larger system, as
 well as further references to more information. Our
 [DESIGN_PRINCIPLES](./DESIGN_PRINCIPLES.md) describe our design approaches,
-conventions, and other beliefs. Any further documentation can be found within
-the [documentation](./documentation/) directory. These include the product
+conventions, and other beliefs. Make also sure to check out our
+[glossary](./GLOSSARY.md), documenting the ubiquitous language and terminology.
+Any further documentation can be found within the
+[documentation](./documentation/) directory. These include the product
 requirements, decision records, tool usage, and more.
 
 ## Contributing

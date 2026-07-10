@@ -30,6 +30,29 @@ npm add @digitalservicebund/a2j-xjustiz-converter
 The library comes with rich IntelliSense support. Contextual hover hints,
 autocompletion, and the compiler itself provide guidance directly in the editor.
 
+<details>
+  <summary>To further improve the experience, glossaries, explaining the ubiquitous language, can be setup to become automatically accessible from within a code editor.</summary>
+
+Glossaries are written in a format consumable by
+[Contextive](https://contextive.tech). Installing the extension for an editor,
+it will automatically provide extra documentation context in hover hints,
+everywhere code symbols contain terms found in the glossary. Complementing the
+code documentation itself, this can help to work with the XJustiz domain and
+the converter.
+
+This requires to define a glossary file in the own (local) repository.
+
+`xjustiz-converter.glossary.yaml`:
+
+```yaml
+imports:
+  - https://github.com/digitalservicebund/a2j-xjustiz-converter/tree/main/xjustiz-converter.glossary.yaml
+  # or with fixed release tag matching the installed library version (e.g. version 0.2.0):
+  - https://github.com/digitalservicebund/a2j-xjustiz-converter/tree/v0.2.0/xjustiz-converter.glossary.yaml
+```
+
+</details>
+
 ## Requirements
 
 The library is in theory agnostic to the JavaScript runtime environment.

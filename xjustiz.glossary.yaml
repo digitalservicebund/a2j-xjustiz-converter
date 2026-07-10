@@ -1,0 +1,73 @@
+# $schema: https://www.schemastore.org/contextive-glossary.json
+contexts:
+  - name: XJustiz-Standard
+    terms:
+      - name: XJustiz-Nachricht
+        definition: |
+          The root entity of the standard. Officially called XJustiz-Nachricht.
+
+          A message is document in XML format to be transmitted via the ERV (Elektronischer Rechtsverkehr) with other parties of the justice system. There are various different message types cross the Fachmodule of the XJustiz standard for different use-cases.
+
+          XJustiz-Converter: foundation for message profiles
+        aliases:
+          - Nachricht
+          - XJustiz message
+      - name: Codeliste
+        definition: |
+          Fixed list of possible code values with description - an enumeration
+
+          For example, for gender, currency, countries, etc. 
+          Concept from the XÖV Standardisierungsrahmen. Only referenced by the standard with independent releases possible.
+          Discoverable at the [XRepository](https://www.xrepository.de).
+
+          XJustiz-Converter: scalar - implemented as TypeScript enumerations.
+      - name: DIN 91379
+        definition: |
+          "Characters and defined character sequences in Unicode for the electronic processing of names and data exchange in Europe"
+
+          Norm specification referenced by the XJustiz-Standard. Most prominent artifacts in XJustiz are the so called Datatypes A, B, C, D, and E. Being A the most restrictive character set with E the most open one.
+
+          XJustiz-Converter: scalar - implemented as refined type with smart constructor
+
+  - name: XJustiz-Converter
+    domainVisionStatement: Assisted composition of XJustiz messages that are ensured to be valid.
+    terms:
+      - name: Message Profile
+        definition: |
+          A narrowed conformance profile based on a XJustiz-Nachricht in the standard.
+
+          Message profiles focus on actual application use cases by online services. They are much more restrictive and enforce various invariants for their related use case. But they also strip down plenty of not relevant aspects for the targeted use case.
+          Multiple message profiles can link to the same underlying XJustiz-Nachricht.
+
+          Each message profile is exposed as its own entry point to the library as a module. They provide everything necessary to compose such a message. This includes the matching message orchestrator.
+
+          See also XJustiz-Nachricht
+        aliases:
+          - message
+      - name: message orchestrator
+        definition: |
+          A message orchestrator is a function that is used to start composing a new message for certain profile.
+
+          The orchestrator enforces internal invariants, controls unique identifier constraints, allows for secure references and more.
+        aliases:
+          - orchestrator
+      - name: scalar
+        definition: |
+          Scalars represent the smallest building blocks of a message.
+
+          They are the leaf data fields of the structured message documents. Scalars come in various different kinds and shapes, implemented with different techniques based on their requirements. Scalars are directly used during the composing of a message with an orchestrator
+      - name: refined type
+        definition: |
+          Refined types are a special kind of scalar.  
+
+          They encode datatypes by the XJustiz-Standard that can't be mapped to plain TypeScript types, but carry additional invariants. For example, scalars for positive integers or strings with limited character set. 
+
+          Refined types use a smart constructor to create branded instances by parsing input values. They are opaque to their base type.
+          A successfully constructed instance can be securely passed anywhere required. These types create a clear boundary of possible errors that must be handled at runtime before message composition.
+      - name: Standard Schema
+        definition: |
+          A common interface for TypeScript validation libraries.
+
+          Supported by refined types for universal and straightforward integration.
+
+          [Link to Website](https://standardschema.dev/schema)
