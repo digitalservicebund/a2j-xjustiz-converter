@@ -1,5 +1,5 @@
-import type { StandardSchemaV1 } from "@standard-schema/spec";
 import type { DeepReadonly, IsAny } from "~/metatypes";
+import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 /**
  * Produce a factory to construct valid instanced for a refined type.
@@ -65,11 +65,11 @@ export function defineRefinedType<
     types: undefined as unknown as StandardSchemaV1.Types<Input, Output>,
   };
 
-  function customize(issueMessages: Messages) {
+  function customize(customIssueMessages: Messages) {
     return defineRefinedType<Input, Output, ParseInput, Messages>(
       isInputType,
       parseInput,
-      issueMessages,
+      customIssueMessages,
     );
   }
 
@@ -143,7 +143,7 @@ export type RefinedTypeFactory<
      * ```
      */
     customize: (
-      issueMessages: Messages,
+      customIssueMessages: Messages,
     ) => RefinedTypeFactory<Input, Output, ParseInput, Messages>;
   };
 
@@ -159,15 +159,14 @@ export type Result<Value, Message extends string = string> =
   | SuccessResult<Value>
   | FailureResult<Message>;
 
-export interface SuccessResult<Value>
-  extends StandardSchemaV1.SuccessResult<Value> {}
+export type SuccessResult<Value> = StandardSchemaV1.SuccessResult<Value>;
 
-export interface FailureResult<Message extends string = string>
-  extends StandardSchemaV1.FailureResult {
-  readonly issues: ReadonlyArray<
-    StandardSchemaV1.Issue & { readonly message: Message }
-  >;
-}
+export type FailureResult<Message extends string = string> =
+  StandardSchemaV1.FailureResult & {
+    readonly issues: readonly (StandardSchemaV1.Issue & {
+      readonly message: Message;
+    })[];
+  };
 
 /**
  * And advanced version of the {@link Result} type for parse functions that have

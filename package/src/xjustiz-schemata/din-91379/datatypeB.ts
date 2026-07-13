@@ -3,23 +3,23 @@ import type {
   DeepLiteralToPrimitive,
 } from "~/metatypes";
 import {
-  defineRefinedType,
-  isString,
   type FailureResult,
   type IsLiteral,
   type LiteralAwareResult,
   type RefinedTypeFactory, // oxlint-disable-line no-unused-vars -- referenced by TSDoc
   type Result,
   type SuccessResult,
+  defineRefinedType,
+  isString,
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
-import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
-import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
-import { findInvalidCharacters } from "./unicode";
 import {
   type LateinischeBuchstabenIncomplete,
   type NichtBuchstaben1,
   type NichtBuchstaben2,
 } from "./normative-characters";
+import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
+import { findInvalidCharacters } from "./unicode";
+import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
 
 declare const TAG: unique symbol;
 
@@ -45,6 +45,7 @@ function parseDatatypeB(
 
     if (DATATYPE_B_PATTERN.test(composedUnicodeInput)) {
       return { value: composedUnicodeInput as unknown as DatatypeB };
+      // oxlint-disable-next-line no-else-return -- false positive
     } else {
       const characters = findInvalidCharacters(
         composedUnicodeInput,
@@ -128,6 +129,7 @@ if (import.meta.vitest) {
    * extensive list of diverse real world examples. The pattern transformation
    * requires extra attention, protected by test.
    */
+  // oxlint-disable-next-line max-lines-per-function -- normal describe block
   describe("Datatype B", async () => {
     const {
       assert,
@@ -135,6 +137,7 @@ if (import.meta.vitest) {
       string: arbitraryString,
     } = await import("fast-check");
 
+    // oxlint-disable-next-line max-lines-per-function -- normal describe block
     describe("runtime parsing", () => {
       it("is successful for an empty string", () => {
         expect(datatypeB("")).toStrictEqual({ value: "" });
@@ -229,10 +232,10 @@ if (import.meta.vitest) {
         assert(
           property(arbitraryString({ unit: "grapheme" }), (input) => {
             const result = datatypeB.customize({
-              invalidCharacters: (characters) => [...characters].join(),
+              invalidCharacters: (characters) => [...characters].join(""),
             })(input);
 
-            return result.issues == undefined || result.issues.length >= 1;
+            return result.issues === undefined || result.issues.length > 0;
           }),
         );
       });
@@ -258,7 +261,7 @@ if (import.meta.vitest) {
 
         expectTypeOf(
           datatypeB(
-            '!"#$%&()*+/0123456789:;<=>?@[\\ ]^_{|}¡¢£¥§©ª«¬®¯°±²³μ¶¹º»¿×÷€',
+            '!"#$%&()*+/0123456789:;<=>?@[ ]^_{|}¡¢£¥§©ª«¬®¯°±²³μ¶¹º»¿×÷€',
           ),
         ).toEqualTypeOf<SuccessResult<DatatypeB>>();
       });
@@ -274,7 +277,7 @@ if (import.meta.vitest) {
       });
 
       it("remains undetermined for non static string literals", () => {
-        const dynamicInput: string = "Unter den Linden 6";
+        const dynamicInput = "Unter den Linden 6" as string;
         expectTypeOf(datatypeB(dynamicInput)).toEqualTypeOf<
           Result<DatatypeB>
         >();

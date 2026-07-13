@@ -16,15 +16,21 @@ Because we install Oxlint via our reproducible development environment, we must
 use JSON. The TypeScript version is only properly supported when installed as
 NodeJS module for a package.
 
+We use JSON with comments (`.jsonc` file ending) to allow documenting minor
+decisions. For example why certain rules are turned off or changed from their
+default configuration options.
+
 ## Let Oxlint Discover Files
 
 For repository-wide runs, Task invokes Oxlint on `.` and lets Oxlint discover matching files. When a file list is provided on the command-line, Task only routes the TypeScript linting task when the list contains `.ts` or `.tsx` files.
 
 To prevent errors when no matching files are found, the `--no-error-on-unmatched-pattern` flag is added to Oxlint commands. This flag may need to be removed once TypeScript files are added to the repository.
 
-## Keep the Initialized Defaults
+## Stick with Defaults
 
-The repository contains a root [`.oxlintrc.json`](../../.oxlintrc.json), initialized from Oxlint defaults. It currently enables the `typescript`, `unicorn`, and `oxc` plugins and sets the `correctness` category to `error`. There are no custom rule overrides yet.
+We aim to stick with the sensible default configuration for all rules by the
+public community where possible. Deviations should be done for good reasons
+only, which must be documented in the configuration file itself.
 
 ## Apply Fixes Explicitly
 

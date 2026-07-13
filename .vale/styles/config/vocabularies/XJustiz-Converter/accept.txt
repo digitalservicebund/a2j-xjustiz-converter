@@ -6,9 +6,10 @@ Verhaltenskodex
 [Dd]evbox
 Flox
 [Dd]evenv
-ESLint
+(?:ESLint|eslint)
+eslint
 [Oo]xlint
-oxc
+(?:OXC|oxc)
 Vite
 bikeshedding
 Kompla
@@ -83,7 +84,6 @@ bundler
 [Tt]sup
 Rolldown
 Rollup
-OXC
 Unplugin
 deduplication
 [Tt]ranspilation
@@ -95,3 +95,4 @@ romanizing
 Koordinierungsstelle
 unrepresentable
 [Cc]ontextive
+perf

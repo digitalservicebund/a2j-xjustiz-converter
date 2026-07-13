@@ -59,15 +59,18 @@ function segmentUnicodeIntoLinguisticGraphemes(text: string): string[] {
 
   for (let index = 0; index < unicodeGraphemeClusters.length; index++) {
     let grapheme = unicodeGraphemeClusters[index];
-    if (grapheme === undefined) continue; // TypeScript can't check the loop index.
-    const endsWithBinaryDiacritic = BINARY_DIACRITICS.test(grapheme);
 
-    if (endsWithBinaryDiacritic) {
-      const nextCluster = unicodeGraphemeClusters[++index];
-      grapheme += nextCluster ?? "";
+    // TypeScript can't check the loop index.
+    if (grapheme) {
+      const endsWithBinaryDiacritic = BINARY_DIACRITICS.test(grapheme);
+
+      if (endsWithBinaryDiacritic) {
+        const nextCluster = unicodeGraphemeClusters[++index];
+        grapheme += nextCluster ?? "";
+      }
+
+      linguisticGraphemes.push(grapheme);
     }
-
-    linguisticGraphemes.push(grapheme);
   }
 
   return linguisticGraphemes;

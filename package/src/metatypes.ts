@@ -7,17 +7,17 @@ export type DeepReadonly<Structure> = unknown extends Structure
   : Structure extends Primitive
     ? Structure
     : Structure extends (infer Item)[]
-      ? ReadonlyArray<DeepReadonly<Item>>
+      ? readonly DeepReadonly<Item>[]
       : Structure extends object
         ? { readonly [Key in keyof Structure]: DeepReadonly<Structure[Key]> }
         : Structure;
 
 export type DeepLiteralToPrimitive<Literal> = Literal extends Primitive
   ? LiteralToPrimitive<Literal>
-  : Literal extends readonly (infer Item)[] // array
+  : Literal extends readonly (infer Item)[] // Array
     ? DeepLiteralToPrimitive<Item>[]
     : Literal extends (...parameters: infer Parameters) => infer Return
-      ? (...parameters: Parameters) => Return // keep functions untouched
+      ? (...parameters: Parameters) => Return // Keep functions untouched
       : Literal extends object
         ? {
             -readonly [Key in keyof Literal]: DeepLiteralToPrimitive<

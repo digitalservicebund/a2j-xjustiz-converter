@@ -3,21 +3,21 @@ import type {
   DeepLiteralToPrimitive,
 } from "~/metatypes";
 import {
-  defineRefinedType,
-  isString,
   type FailureResult,
   type IsLiteral,
   type LiteralAwareResult,
   type RefinedTypeFactory, // oxlint-disable-line no-unused-vars -- referenced by TSDoc
   type Result,
   type SuccessResult,
+  defineRefinedType,
+  isString,
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
-import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
-import { findInvalidCharacters } from "./unicode";
 import {
   type LateinischeBuchstabenIncomplete,
   type NichtBuchstaben1,
 } from "./normative-characters";
+import { findInvalidCharacters } from "./unicode";
+import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
 
 declare const TAG: unique symbol;
 
@@ -43,6 +43,7 @@ function parseDatatypeA(
 
     if (DATATYPE_A_PATTERN.test(composedUnicodeInput)) {
       return { value: composedUnicodeInput as unknown as DatatypeA };
+      // oxlint-disable-next-line no-else-return -- false positive
     } else {
       const characters = findInvalidCharacters(
         composedUnicodeInput,
@@ -135,6 +136,7 @@ if (import.meta.vitest) {
    * extensive list of diverse real world examples. The pattern transformation
    * requires extra attention, protected by test.
    */
+  // oxlint-disable-next-line max-lines-per-function -- normal describe block
   describe("Datatype A", async () => {
     const {
       assert,
@@ -142,6 +144,7 @@ if (import.meta.vitest) {
       string: arbitraryString,
     } = await import("fast-check");
 
+    // oxlint-disable-next-line max-lines-per-function -- normal describe block
     describe("runtime parsing", () => {
       it("is successful for an empty string", () => {
         expect(datatypeA("")).toStrictEqual({ value: "" });
@@ -225,10 +228,10 @@ if (import.meta.vitest) {
         assert(
           property(arbitraryString({ unit: "grapheme" }), (input) => {
             const result = datatypeA.customize({
-              invalidCharacters: (characters) => [...characters].join(),
+              invalidCharacters: (characters) => [...characters].join(""),
             })(input);
 
-            return result.issues == undefined || result.issues.length >= 1;
+            return result.issues === undefined || result.issues.length > 0;
           }),
         );
       });
@@ -273,7 +276,7 @@ if (import.meta.vitest) {
       });
 
       it("remains undetermined for non static string literals", () => {
-        const dynamicInput: string = "Erika Musterfrau";
+        const dynamicInput = "Erika Musterfrau" as string;
         expectTypeOf(datatypeA(dynamicInput)).toEqualTypeOf<
           Result<DatatypeA>
         >();

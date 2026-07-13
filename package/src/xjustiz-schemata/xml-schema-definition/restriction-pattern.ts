@@ -15,18 +15,8 @@
 export function transformXsdPatternToJavaScriptExpression(
   xsdPattern: string,
 ): RegExp {
-  const numericCharacterReferencesToEscapedUnicode = (pattern: string) =>
-    pattern.replace(/\\?&#x([0-9a-fA-F]{4});/g, "\\u$1"); // e.g. "&#x1E63;" -> "\u1E63"
-
-  const removeCapturingFromMatchGroups = (pattern: string) =>
-    pattern.replace(/\\.|(\((?!\?))/g, (match, openParenthesis) =>
-      openParenthesis ? "(?:" : match,
-    ); // e.g. "\\(A-Z)" -> "\\(?:A-Z)" (handles preceding escapes cases with `\`)
-
-  const addExplicitLineMatching = (pattern: string) => `^${pattern}$`;
-
   const transformationSteps = [
-    numericCharacterReferencesToEscapedUnicode,
+    transformNumericCharacterReferencesToEscapedUnicode,
     removeCapturingFromMatchGroups,
     addExplicitLineMatching,
   ];
@@ -37,6 +27,24 @@ export function transformXsdPatternToJavaScriptExpression(
   );
 
   return new RegExp(javaScriptPattern, "u");
+}
+
+function transformNumericCharacterReferencesToEscapedUnicode(
+  pattern: string,
+): string {
+  // E.g. "&#x1E63;" -> "\u1E63"
+  return pattern.replaceAll(/\\?&#x([0-9a-fA-F]{4});/gu, "\\u$1");
+}
+
+function removeCapturingFromMatchGroups(pattern: string): string {
+  // E.g. "\\(A-Z)" -> "\\(?:A-Z)" (handles preceding escapes cases with `\`)
+  return pattern.replaceAll(/\\.|(\((?!\?))/gu, (match, openParenthesis) =>
+    openParenthesis ? "(?:" : match,
+  );
+}
+
+function addExplicitLineMatching(pattern: string): string {
+  return `^${pattern}$`;
 }
 
 if (import.meta.vitest) {
@@ -53,12 +61,12 @@ if (import.meta.vitest) {
       it("maps numeric character references to escaped unicode", () => {
         expect(
           transformXsdPatternToJavaScriptExpression("&#x1E63;").source,
-        ).toEqual(new RegExp(String.raw`^\u1E63$`).source); // address normalization
+        ).toEqual(new RegExp(String.raw`^\u1E63$`, "u").source); // Address normalization
 
         expect(
           // oxlint-disable-next-line no-useless-escape -- original example from XSD
           transformXsdPatternToJavaScriptExpression("\&#x1E63;").source,
-        ).toEqual(new RegExp(String.raw`^\u1E63$`).source); // address normalization
+        ).toEqual(new RegExp(String.raw`^\u1E63$`, "u").source); // Address normalization
       });
 
       it("makes removes capturing from match groups", () => {

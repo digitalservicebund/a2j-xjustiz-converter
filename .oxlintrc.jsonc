@@ -1,0 +1,26 @@
+// Tool usage documentation at: ./documentation/tool-usage/oxlint.md
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/refs/heads/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error",
+    "style": "error",
+  },
+  "options": {
+    "reportUnusedDisableDirectives": "error",
+  },
+  "rules": {
+    "unicorn/filename-case": "off", // Undecided yet, gonna add ls-lint soon
+    "unicorn/prefer-string-raw": "off", // Breaks static literal type inference.
+    "eslint/sort-keys": "off", // Developer curated sorting can highly increase readability.
+    "eslint/no-ternary": "off", // Ternaries can simplify code and increase readability.
+    "eslint/no-magic-numbers": "off", // Too many false positives that reduce quality.
+    "eslint/max-statements": "off", // Unsuited metric to actually reduce complexity.
+    "eslint/no-inline-comments": "off", // They actually reduce risk of rotting.
+    "eslint/max-lines": ["error", 400], // In-source demand more lines (default is 300).
+    "func-style": ["error", "declaration"],
+  },
+}
