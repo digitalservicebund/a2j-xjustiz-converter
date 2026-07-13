@@ -40,11 +40,13 @@ export type DatatypeB = string & {
 function parseDatatypeB(
   issueMessages: DatatypeBIssueMessages = DEFAULT_ISSUE_MESSAGES,
 ) {
+  // oxlint-disable-next-line no-unsafe-type-assertion -- necessary "trick" for compile-time parsing
   return function parse(input: string): Result<DatatypeB> {
     const composedUnicodeInput = input.normalize("NFC");
 
     if (DATATYPE_B_PATTERN.test(composedUnicodeInput)) {
-      return { value: composedUnicodeInput as unknown as DatatypeB };
+      return { value: composedUnicodeInput as unknown as DatatypeB }; // oxlint-disable-line no-unsafe-type-assertion -- explicit cast "trick" for branding
+
       // oxlint-disable-next-line no-else-return -- false positive
     } else {
       const characters = findInvalidCharacters(
@@ -65,7 +67,7 @@ const DEFAULT_ISSUE_MESSAGES = {
   /**
    * @param characters - graphemes as phoneme units in composed Unicode format
    */
-  invalidCharacters: (characters: Set<string>) =>
+  invalidCharacters: (characters: Readonly<Set<string>>) =>
     `Contains characters not allowed by DIN 91379 Datentyp B: ${[...characters].map((character) => `'${character}'`).join(", ")}`,
 } as const;
 
@@ -206,7 +208,9 @@ if (import.meta.vitest) {
         },
       );
 
-      test.each([
+      test.each<
+        Readonly<{ input: string; invalidCharacters: Readonly<Set<string>> }>
+      >([
         { input: "12–14 Main", invalidCharacters: new Set(["–"]) },
         { input: "221½ Baker", invalidCharacters: new Set(["½"]) },
         { input: "ACME™ House", invalidCharacters: new Set(["™"]) },

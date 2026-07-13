@@ -62,7 +62,7 @@ export function defineRefinedType<
     version: 1,
     vendor: VENDOR,
     validate: validateForStandardSchema,
-    types: undefined as unknown as StandardSchemaV1.Types<Input, Output>,
+    types: undefined as unknown as StandardSchemaV1.Types<Input, Output>, // oxlint-disable-line no-unsafe-type-assertion -- standard practice for runtime erasure
   };
 
   function customize(customIssueMessages: Messages) {

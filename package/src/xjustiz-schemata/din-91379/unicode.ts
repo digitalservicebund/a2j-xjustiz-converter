@@ -19,7 +19,7 @@
  */
 export function findInvalidCharacters(
   input: string,
-  allowedCharacters: RegExp,
+  allowedCharacters: Readonly<RegExp>,
 ): Set<string> {
   return new Set(
     segmentUnicodeIntoLinguisticGraphemes(input).filter(
@@ -52,7 +52,7 @@ function segmentUnicodeIntoLinguisticGraphemes(text: string): string[] {
     new globalThis.Intl.Segmenter(UNDETERMINED_LOCALE, {
       granularity: "grapheme",
     }).segment(text),
-    (segment) => segment.segment,
+    (segment: Readonly<Intl.SegmentData>) => segment.segment,
   );
 
   const linguisticGraphemes: string[] = [];
@@ -61,7 +61,7 @@ function segmentUnicodeIntoLinguisticGraphemes(text: string): string[] {
     let grapheme = unicodeGraphemeClusters[index];
 
     // TypeScript can't check the loop index.
-    if (grapheme) {
+    if (grapheme !== undefined) {
       const endsWithBinaryDiacritic = BINARY_DIACRITICS.test(grapheme);
 
       if (endsWithBinaryDiacritic) {

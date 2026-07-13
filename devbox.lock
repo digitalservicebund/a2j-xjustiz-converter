@@ -614,6 +614,54 @@
         }
       }
     },
+    "tsgolint@0.24.0": {
+      "last_modified": "2026-07-02T07:55:03Z",
+      "resolved": "github:NixOS/nixpkgs/d33369954a67ae3322177dc9a3d564092912120c#tsgolint",
+      "source": "devbox-search",
+      "version": "0.24.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/aaq6h1nrgbmhw7nzvgzsc2fl8w66ikwv-tsgolint-0.24.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/aaq6h1nrgbmhw7nzvgzsc2fl8w66ikwv-tsgolint-0.24.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/7r4is62ana6kj4z25jzndmq3bfxnwh6p-tsgolint-0.24.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/7r4is62ana6kj4z25jzndmq3bfxnwh6p-tsgolint-0.24.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/z8mf11f1vqfk3w3jg8il2rm13ip7qxdn-tsgolint-0.24.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/z8mf11f1vqfk3w3jg8il2rm13ip7qxdn-tsgolint-0.24.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cf9n76idyvdi5qgw52j9llbdj3bk46b1-tsgolint-0.24.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/cf9n76idyvdi5qgw52j9llbdj3bk46b1-tsgolint-0.24.0"
+        }
+      }
+    },
     "vale-ls@0.4.0": {
       "last_modified": "2026-03-23T05:26:49Z",
       "resolved": "github:NixOS/nixpkgs/4724d5647207377bede08da3212f809cbd94a648#vale-ls",

@@ -38,11 +38,12 @@ export type DatatypeA = string & {
 function parseDatatypeA(
   issueMessages: DatatypeAIssueMessages = DEFAULT_ISSUE_MESSAGES,
 ) {
+  // oxlint-disable-next-line no-unsafe-type-assertion -- necessary "trick" for compile-time parsing
   return function parse(input: string): Result<DatatypeA> {
     const composedUnicodeInput = input.normalize("NFC");
 
     if (DATATYPE_A_PATTERN.test(composedUnicodeInput)) {
-      return { value: composedUnicodeInput as unknown as DatatypeA };
+      return { value: composedUnicodeInput as unknown as DatatypeA }; // oxlint-disable-line no-unsafe-type-assertion -- explicit cast "trick" for branding
       // oxlint-disable-next-line no-else-return -- false positive
     } else {
       const characters = findInvalidCharacters(
@@ -63,7 +64,7 @@ const DEFAULT_ISSUE_MESSAGES = {
   /**
    * @param characters - graphemes as phoneme units in composed Unicode format
    */
-  invalidCharacters: (characters: Set<string>) =>
+  invalidCharacters: (characters: Readonly<Set<string>>) =>
     `Contains characters not allowed by DIN 91379 Datentyp A: ${[...characters].map((character) => `'${character}'`).join(", ")}`,
 } as const;
 
@@ -183,7 +184,9 @@ if (import.meta.vitest) {
         expect(datatypeA(name)).toStrictEqual({ value: name });
       });
 
-      test.each([
+      test.each<
+        Readonly<{ name: string; invalidCharacters: Readonly<Set<string>> }>
+      >([
         { name: "Max Must3rmann", invalidCharacters: new Set(["3"]) },
         {
           name: "Max1 (Friedrich) Mustermann",
@@ -198,7 +201,9 @@ if (import.meta.vitest) {
         },
       );
 
-      test.each([
+      test.each<
+        Readonly<{ name: string; invalidCharacters: Readonly<Set<string>> }>
+      >([
         {
           name: "Νίκος",
           invalidCharacters: new Set(["Ν", "ί", "κ", "ο", "ς"]),

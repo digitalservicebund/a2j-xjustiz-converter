@@ -38,8 +38,9 @@ function transformNumericCharacterReferencesToEscapedUnicode(
 
 function removeCapturingFromMatchGroups(pattern: string): string {
   // E.g. "\\(A-Z)" -> "\\(?:A-Z)" (handles preceding escapes cases with `\`)
-  return pattern.replaceAll(/\\.|(\((?!\?))/gu, (match, openParenthesis) =>
-    openParenthesis ? "(?:" : match,
+  return pattern.replaceAll(
+    /\\.|(\((?!\?))/gu,
+    (match, openParenthesis: string) => (openParenthesis ? "(?:" : match),
   );
 }
 
