@@ -1,5 +1,5 @@
-import type { DeepReadonly, IsAny } from "~/metatypes";
-import type { StandardSchemaV1 } from "@standard-schema/spec";
+import { type DeepReadonly, type IsAny } from "~/metatypes";
+import { type StandardSchemaV1 } from "@standard-schema/spec";
 
 /**
  * Produce a factory to construct valid instanced for a refined type.

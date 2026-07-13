@@ -1,7 +1,7 @@
 // Tool usage documentation at: ./documentation/tool-usage/oxlint.md
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/refs/heads/main/npm/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "unicorn", "oxc"],
+  "plugins": ["typescript", "unicorn", "oxc", "import"],
   "categories": {
     "correctness": "error",
     "suspicious": "error",
@@ -22,6 +22,11 @@
     "eslint/max-statements": "off", // Unsuited metric to actually reduce complexity.
     "eslint/no-inline-comments": "off", // They actually reduce risk of rotting.
     "eslint/max-lines": ["error", 400], // In-source demand more lines (default is 300).
+    "import/no-named-export": "off", // Strongly believe in named exports for better imports.
+    "import/prefer-default-export": "off", // Strongly believe in named exports for better imports.
+    "import/exports-last": "off", // Against our design principles of module ordering.
+    "import/group-exports": "off", // Against our design principles of module ordering.
+    "import/consistent-type-specifier-style": ["error", "prefer-inline"], // Conflict with eslint/no-duplicate-imports.
     "func-style": ["error", "declaration"],
   },
 }

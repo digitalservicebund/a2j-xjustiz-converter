@@ -1,6 +1,6 @@
-import type {
-  ConsumeCharactersFrom,
-  DeepLiteralToPrimitive,
+import {
+  type ConsumeCharactersFrom,
+  type DeepLiteralToPrimitive,
 } from "~/metatypes";
 import {
   type FailureResult,
