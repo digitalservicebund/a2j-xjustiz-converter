@@ -236,7 +236,7 @@ if (import.meta.vitest) {
               invalidCharacters: (characters) => [...characters].join(""),
             })(input);
 
-            return result.issues === undefined || result.issues.length > 0;
+            return result.issues === undefined || result.issues.length > 0; // oxlint-disable-line no-conditional-in-test -- seems not fixable
           }),
         );
       });
