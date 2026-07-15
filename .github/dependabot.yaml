@@ -7,6 +7,10 @@ updates:
       interval: "daily"
     cooldown:
       default-days: 3
+    groups:
+      patch-updates:
+        update-types:
+          - "patch"
 
   - package-ecosystem: "github-actions"
     directory: "./.github/"
