@@ -1,10 +1,10 @@
 # $schema=https://www.schemastore.org/github-workflow.json
 name: verify codebase health
-
 on:
   schedule:
     - cron: 0 0 * * * # nightly
-
+permissions:
+  contents: read
 jobs:
   verify-codebase-integrity:
     runs-on: ubuntu-latest
