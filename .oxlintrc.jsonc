@@ -14,6 +14,7 @@
     "reportUnusedDisableDirectives": "error",
   },
   "rules": {
+    // Adaptions to rules enabled by categories:
     "unicorn/filename-case": "off", // Undecided yet, gonna add ls-lint soon
     "unicorn/prefer-string-raw": "off", // Breaks static literal type inference.
     "eslint/sort-keys": "off", // Developer curated sorting can highly increase readability.
@@ -28,5 +29,16 @@
     "import/group-exports": "off", // Against our design principles of module ordering.
     "import/consistent-type-specifier-style": ["error", "prefer-inline"], // Conflict with eslint/no-duplicate-imports.
     "func-style": ["error", "declaration"],
+
+    // Manually enabled rules from the 'restriction' category:
+    "typescript/no-explicit-any": "error", // Against our strong type-driven development approach.
+    "typescript/no-non-null-assertion": "error", // Against our strong type-driven development approach.
+    "eslint/no-empty": "error", // Usually a code smell of unfinished work.
+    "eslint/no-eq-null": "error", // Require type checking operator for security.
+    "oxc/no-barrel-file": "error", // Can hurt upstream builds for performance and tree-shaking.
+    "oxc/no-const-enum": "error", // Our enums must remain usable by library users.
+    "import/no-cycle": "error", // Avoid confusing bugs due to weak architecture.
+    "import/no-relative-parent-imports": "error", // Avoid such dependencies or use path alias.
+    "import/no-default-export": "error", // We prefer named imports/exports for controlled naming.
   },
 }

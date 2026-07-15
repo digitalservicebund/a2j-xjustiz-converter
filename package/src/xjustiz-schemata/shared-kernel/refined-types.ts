@@ -222,7 +222,7 @@ export type LiteralAwareResult<
   Output,
 > =
   IsLiteral<Value, Input> extends true
-    ? StaticResult extends SuccessResult<any>
+    ? StaticResult extends SuccessResult<unknown>
       ? SuccessResult<Output>
       : StaticResult extends FailureResult<infer Message>
         ? FailureResult<Message>
@@ -243,7 +243,7 @@ export type LiteralAwareResult<
  *
  * Check out the documentation for refined types for more details and examples.
  */
-type IssueMessages = Record<PropertyKey, string | ((...args: any) => string)>;
+type IssueMessages = Record<PropertyKey, string | ((...args: any) => string)>; // oxlint-disable-line no-explicit-any -- only way to define signature of any arguments
 
 export type IsLiteral<MaybeLiteral, Base> =
   IsAny<MaybeLiteral> extends true

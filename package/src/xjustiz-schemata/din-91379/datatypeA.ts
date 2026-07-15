@@ -281,7 +281,7 @@ if (import.meta.vitest) {
       });
 
       it("remains undetermined for non static string literals", () => {
-        const dynamicInput = "Erika Musterfrau" as string;
+        const dynamicInput = String.raw`Erika Musterfrau`;
         expectTypeOf(datatypeA(dynamicInput)).toEqualTypeOf<
           Result<DatatypeA>
         >();
