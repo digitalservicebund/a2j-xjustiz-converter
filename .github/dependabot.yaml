@@ -1,0 +1,16 @@
+# $schema: https://www.schemastore.org/dependabot-2.0.json
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "./package/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 3
+
+  - package-ecosystem: "github-actions"
+    directory: "./.github/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 3
