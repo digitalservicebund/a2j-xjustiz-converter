@@ -17,6 +17,7 @@
     // Adaptions to rules enabled by categories:
     "unicorn/filename-case": "off", // Undecided yet, gonna add ls-lint soon
     "unicorn/prefer-string-raw": "off", // Breaks static literal type inference.
+    "unicorn/number-literal-case": "off", // Conflict with Prettier formatting.
     "eslint/sort-keys": "off", // Developer curated sorting can highly increase readability.
     "eslint/no-ternary": "off", // Ternaries can simplify code and increase readability.
     "eslint/no-magic-numbers": "off", // Too many false positives that reduce quality.

@@ -67,7 +67,7 @@ invalid
 irrepresentable
 Mandantengeheimnis
 PDFs
-datatypes
+[Dd]atatypes
 Governikus
 xdomea
 XRepository

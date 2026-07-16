@@ -85,6 +85,10 @@ export function isString(value: unknown): value is string {
   return typeof value === "string";
 }
 
+export function isNumber(value: unknown): value is number {
+  return typeof value === "number";
+}
+
 /**
  * A factory for a refined type is a function object to construct valid
  * instances by parsing input values. Each factory is also compatible with the
