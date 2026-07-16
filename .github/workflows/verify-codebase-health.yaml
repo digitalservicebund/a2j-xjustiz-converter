@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  verify-codebase-integrity:
+  verify-codebase-health:
     runs-on: ubuntu-latest
     steps:
       - name: checkout codebase
