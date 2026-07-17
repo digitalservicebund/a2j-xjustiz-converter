@@ -14,10 +14,10 @@ import {
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
 import {
   type LateinischeBuchstabenIncomplete,
-  type NichtBuchstaben1,
-  type NichtBuchstaben2,
-  type NichtBuchstaben3,
-  type NichtBuchstaben4,
+  type NichtBuchstabenN1,
+  type NichtBuchstabenN2,
+  type NichtBuchstabenN3,
+  type NichtBuchstabenN4,
 } from "./schriftzeichengruppe";
 import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { type DatatypeB } from "./datatypeB"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
@@ -31,7 +31,7 @@ declare const TAG: unique symbol;
  *
  * This is an extension of {@link DatatypeA} and {@link DatatypeB}, meant to be
  * used for general free text. That includes all Latin characters, plus additional
- * non-letters of the groups N1, N2, N3, and N4 ("Nicht-Buchstaben 1, 2, 3 und 4").
+ * non-letters of the groups N1, N2, N3, and N4 ("Nicht-Buchstaben N1, 2, 3 und 4").
  * Texts with Greek or Cyrillic letters or with extended (nicht-normativen)
  * Nicht-Buchstaben are inadmissible.
  *
@@ -88,10 +88,10 @@ type ParseDatatypeC<Value extends string> =
 
 type DatatypeCCharacterIncomplete =
   | LateinischeBuchstabenIncomplete
-  | NichtBuchstaben1
-  | NichtBuchstaben2
-  | NichtBuchstaben3
-  | NichtBuchstaben4;
+  | NichtBuchstabenN1
+  | NichtBuchstabenN2
+  | NichtBuchstabenN3
+  | NichtBuchstabenN4;
 
 /**
  * Factory function object for the {@link DatatypeC} refined type. See

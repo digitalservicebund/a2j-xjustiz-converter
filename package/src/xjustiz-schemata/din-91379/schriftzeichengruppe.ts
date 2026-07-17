@@ -10,30 +10,30 @@
 export type LateinischeBuchstabenIncomplete = "a" | "A" | "b" | "B" | "c" | "C" | "d" | "D" | "e" | "E" | "f" | "F" | "g" | "G" | "h" | "H" | "i" | "I" | "j" | "J" | "k" | "K" | "l" | "L" | "m" | "M" | "n" | "N" | "o" | "O" | "p" | "P" | "q" | "Q" | "r" | "R" | "s" | "S" | "t" | "T" | "u" | "U" | "v" | "V" | "w" | "W" | "x" | "X" | "y" | "Y" | "z" | "Z";
 
 /**
- * "Nicht-Buchstaben 1" defined in table 5 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
+ * "Nicht-Buchstaben N1" defined in table 5 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
  */
 // prettier-ignore
-export type NichtBuchstaben1 = " " | "'" | "," | "-" | "." | "`" | "~" | "¨" | "´" | "·" | "ʹ" | "ʺ" | "ʾ" | "ʿ" | "ˈ" | "ˌ" | "’" | "‡"
+export type NichtBuchstabenN1 = " " | "'" | "," | "-" | "." | "`" | "~" | "¨" | "´" | "·" | "ʹ" | "ʺ" | "ʾ" | "ʿ" | "ˈ" | "ˌ" | "’" | "‡"
 
 /**
- * "Nicht-Buchstaben 2" defined in table 5 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
+ * "Nicht-Buchstaben N2" defined in table 5 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
  */
 // prettier-ignore
-export type NichtBuchstaben2 = "!" | '"' | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "/" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "\\" | "]" | "^" | "_" | "{" | "|" | "}" | "¡" | "¢" | "£" | "¥" | "§" | "©" | "ª" | "«" | "¬" | "®" | "¯" | "°" | "±" | "²" | "³" | "μ" | "¶" | "¹" | "º" | "»" | "¿" | "×" | "÷" | "€";
+export type NichtBuchstabenN2 = "!" | '"' | "#" | "$" | "%" | "&" | "(" | ")" | "*" | "+" | "/" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "\\" | "]" | "^" | "_" | "{" | "|" | "}" | "¡" | "¢" | "£" | "¥" | "§" | "©" | "ª" | "«" | "¬" | "®" | "¯" | "°" | "±" | "²" | "³" | "μ" | "¶" | "¹" | "º" | "»" | "¿" | "×" | "÷" | "€";
 
 /**
- * "Nicht-Buchstaben 3" defined in table 7 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
+ * "Nicht-Buchstaben N3" defined in table 7 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
  * Consists of 6 normative characters required for the entries of legal entities (Namen juristischer Personen).
  */
 // prettier-ignore
-export type NichtBuchstaben3 = "¤" | "¦" | "¸" | "¼" | "½" | "¾";
+export type NichtBuchstabenN3 = "¤" | "¦" | "¸" | "¼" | "½" | "¾";
 
 /**
- * "Nicht-Buchstaben 4" defined in table 8 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
+ * "Nicht-Buchstaben N4" defined in table 8 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.
  * Consists of 4 structural layouts and control strings (tab, line feed, carriage return, and no-break space).
  */
 // prettier-ignore
-export type NichtBuchstaben4 = "\t" | "\n" | "\r" | "\u00A0";
+export type NichtBuchstabenN4 = "\t" | "\n" | "\r" | "\u00A0";
 
 /**
  * "Griechische Buchstaben" defined in table A.1 of the {@link _StringLatinPlusSpecification | String.Latin+ specification}.

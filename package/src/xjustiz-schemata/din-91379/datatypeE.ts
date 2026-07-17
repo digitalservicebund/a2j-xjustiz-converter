@@ -16,11 +16,11 @@ import {
   type GriechischeBuchstaben,
   type KyrillischeBuchstabenA3,
   type LateinischeBuchstabenIncomplete,
-  type NichtBuchstaben1,
-  type NichtBuchstaben2,
-  type NichtBuchstaben3,
-  type NichtBuchstaben4,
   type NichtBuchstabenE1,
+  type NichtBuchstabenN1,
+  type NichtBuchstabenN2,
+  type NichtBuchstabenN3,
+  type NichtBuchstabenN4,
 } from "./schriftzeichengruppe";
 import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { type DatatypeB } from "./datatypeB"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
@@ -96,10 +96,10 @@ type ParseDatatypeE<Value extends string> =
 
 type DatatypeECharacterIncomplete =
   | LateinischeBuchstabenIncomplete
-  | NichtBuchstaben1
-  | NichtBuchstaben2
-  | NichtBuchstaben3
-  | NichtBuchstaben4
+  | NichtBuchstabenN1
+  | NichtBuchstabenN2
+  | NichtBuchstabenN3
+  | NichtBuchstabenN4
   | GriechischeBuchstaben
   | KyrillischeBuchstabenA3
   | NichtBuchstabenE1;

@@ -14,8 +14,8 @@ import {
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
 import {
   type LateinischeBuchstabenIncomplete,
-  type NichtBuchstaben1,
-  type NichtBuchstaben2,
+  type NichtBuchstabenN1,
+  type NichtBuchstabenN2,
 } from "./schriftzeichengruppe";
 import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { findInvalidCharacters } from "./unicode";
@@ -29,7 +29,7 @@ declare const TAG: unique symbol;
  * This is an extension of {@link DatatypeA}, meant to be used for address
  * related scalars like street name, house number, names of cities, and legal
  * entities like companies. That includes all Latin characters, plus additional
- * non-letters of the groups N1 and N2 ("Nicht-Buchstaben 1 und 2").
+ * non-letters of the groups N1 and N2 ("Nicht-Buchstaben N1 und N2").
  *
  * See the related {@link datatypeB | refined type factory} for construction.
  */
@@ -119,8 +119,8 @@ const DATATYPE_B_PATTERN =
 
 type DatatypeBCharacterIncomplete =
   | LateinischeBuchstabenIncomplete
-  | NichtBuchstaben1
-  | NichtBuchstaben2;
+  | NichtBuchstabenN1
+  | NichtBuchstabenN2;
 
 if (import.meta.vitest) {
   const { describe, it, test, expect, expectTypeOf, vi } = import.meta.vitest;
@@ -250,7 +250,7 @@ if (import.meta.vitest) {
         expectTypeOf(datatypeB("")).toEqualTypeOf<SuccessResult<DatatypeB>>();
       });
 
-      it("is predetermined to succeed for full ASCII range and Nicht-Buchstaben 1 and 2", () => {
+      it("is predetermined to succeed for full ASCII range and Nicht-Buchstaben N1 and N2", () => {
         expectTypeOf(datatypeB("Unter den Linden 6")).toEqualTypeOf<
           SuccessResult<DatatypeB>
         >();

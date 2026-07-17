@@ -14,7 +14,7 @@ import {
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
 import {
   type LateinischeBuchstabenIncomplete,
-  type NichtBuchstaben1,
+  type NichtBuchstabenN1,
 } from "./schriftzeichengruppe";
 import { findInvalidCharacters } from "./unicode";
 import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
@@ -123,7 +123,7 @@ const DATATYPE_A_PATTERN =
 
 type DatatypeACharacterIncomplete =
   | LateinischeBuchstabenIncomplete
-  | NichtBuchstaben1;
+  | NichtBuchstabenN1;
 
 // prettier-ignore
 type GuaranteedInvalidCharacter = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "#" | "$" | "%" | "&" | "*" | "+" | "/" | "<" | "=" | ">" | "@" | "\\" | "^" | "_" | "|" | "!" | '"' | "(" | ")" | ":" | ";" | "?" | "[" | "]" | "{" | "}";
@@ -247,7 +247,7 @@ if (import.meta.vitest) {
         expectTypeOf(datatypeA("")).toEqualTypeOf<SuccessResult<DatatypeA>>();
       });
 
-      it("is predetermined to succeed for valid ASCII range and Nicht-Buchstaben 1", () => {
+      it("is predetermined to succeed for valid ASCII range and Nicht-Buchstaben N1", () => {
         expectTypeOf(datatypeA("Erika Musterfrau")).toEqualTypeOf<
           SuccessResult<DatatypeA>
         >();
