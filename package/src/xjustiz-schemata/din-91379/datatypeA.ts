@@ -15,7 +15,7 @@ import {
 import {
   type LateinischeBuchstabenIncomplete,
   type NichtBuchstaben1,
-} from "./normative-characters";
+} from "./schriftzeichengruppe";
 import { findInvalidCharacters } from "./unicode";
 import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
 

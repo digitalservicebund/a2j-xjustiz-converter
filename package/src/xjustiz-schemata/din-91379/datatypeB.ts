@@ -16,7 +16,7 @@ import {
   type LateinischeBuchstabenIncomplete,
   type NichtBuchstaben1,
   type NichtBuchstaben2,
-} from "./normative-characters";
+} from "./schriftzeichengruppe";
 import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { findInvalidCharacters } from "./unicode";
 import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
