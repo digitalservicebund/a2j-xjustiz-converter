@@ -6,6 +6,18 @@ import {
   type DatatypeB,
   datatypeB,
 } from "~/xjustiz-schemata/din-91379/datatypeB";
+import {
+  type DatatypeC,
+  datatypeC,
+} from "~/xjustiz-schemata/din-91379/datatypeC";
+import {
+  type DatatypeD,
+  datatypeD,
+} from "~/xjustiz-schemata/din-91379/datatypeD";
+import {
+  type DatatypeE,
+  datatypeE,
+} from "~/xjustiz-schemata/din-91379/datatypeE";
 
 /**
  * Message orchestrator to compose a Nachricht for a _Zahlungsklage_.
@@ -22,4 +34,15 @@ export function zahlungsklage(name: DatatypeA, addresse: DatatypeB): string {
   return `<nachricht.klaver.klageverfahren.3500001>Name: ${name}; Addresse: ${addresse}</<nachricht.klaver.klageverfahren.3500001>`;
 }
 
-export { type DatatypeA, datatypeA, type DatatypeB, datatypeB };
+export {
+  type DatatypeA,
+  datatypeA,
+  type DatatypeB,
+  datatypeB,
+  type DatatypeC,
+  datatypeC,
+  type DatatypeD,
+  datatypeD,
+  type DatatypeE,
+  datatypeE,
+};
