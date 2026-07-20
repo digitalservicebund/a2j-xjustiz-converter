@@ -40,7 +40,7 @@ The library is made up of the following components.
 The foundation is the TypeScript implementation of the XJustiz schemata. This is
 primarily a collection of advanced types that align with the JSON Schema of the
 OpenAPI specification by the XJustiz-Tools. This schema is a translated version
-of the official XJustiz schemata as XML Schema Descriptions. It is more
+of the official XJustiz schemata as XML Schema Definition. It is more
 permissive and requires internal enhancement to provide enough compile time
 guarantees. At the root are the so called XJustiz messages that are exchanged
 within the _Elektronischen Rechtsverkehr_ (translation: electronic legal

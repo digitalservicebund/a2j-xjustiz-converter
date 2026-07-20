@@ -84,7 +84,7 @@ type ParseDatatypeB<Value extends string> =
 
 /**
  * Factory function object fro the {@link DatatypeB} refined type. See
- * {@link RefinedTypeFactory} for further details, usage examples and
+ * {@link RefinedTypeFactory} for further details, usage examples, and
  * customization.
  *
  * Support for partial compile-time parsing of static string literals. Only

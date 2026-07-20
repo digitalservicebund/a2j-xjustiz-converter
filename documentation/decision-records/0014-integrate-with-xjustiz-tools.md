@@ -17,7 +17,7 @@ a presentation. With the latest feature additions, it has become more
 interesting to be used within the Access to Justice project.
 
 The primary feature of interest is a JSON Schema version of the XJustiz
-standard, translated from the official XML Schema Description. With the focus on
+standard, translated from the official XML Schema Definition. With the focus on
 JSON, it has the potential to make generating XJustiz messages as XML documents
 more integrated for applications on the web platform with JavaScript. Just as
 our Onlinedienste are.
