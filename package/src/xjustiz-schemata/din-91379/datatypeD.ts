@@ -20,7 +20,6 @@ import {
   type NichtBuchstabenN2,
   type NichtBuchstabenN3,
 } from "./schriftzeichengruppe";
-import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { type DatatypeB } from "./datatypeB"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { findInvalidCharacters } from "./unicode";
 import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
@@ -30,7 +29,7 @@ declare const TAG: unique symbol;
 /**
  * Datatype D of the DIN SPEC 91379 norm. A string with restricted character set.
  *
- * This is an extension of {@link DatatypeA} and {@link DatatypeB}, meant to be
+ * This is an extension of {@link DatatypeB}, meant to be
  * used primarily for names of legal entities and product names. Note that it
  * does not extend Datatype C, because control characters and newlines (group
  * N4) are not permitted.
