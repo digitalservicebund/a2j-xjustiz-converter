@@ -22,9 +22,6 @@ import {
   type NichtBuchstabenN3,
   type NichtBuchstabenN4,
 } from "./schriftzeichengruppe";
-import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
-import { type DatatypeB } from "./datatypeB"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
-import { type DatatypeC } from "./datatypeC"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { type DatatypeD } from "./datatypeD"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { findInvalidCharacters } from "./unicode";
 import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
@@ -34,10 +31,12 @@ declare const TAG: unique symbol;
 /**
  * Datatype E of the DIN SPEC 91379 norm. A string with restricted character set.
  *
- * This is an extension of {@link DatatypeA}, {@link DatatypeB}, {@link DatatypeC},
- * and {@link DatatypeD}, making it the most comprehensive datatype. It encompasses
- * all normative and extended characters defined by the DIN norm. It includes Latin,
- * Greek, and Cyrillic alphabets, as well as non-letters N1-N4 and E1.
+ * This is an extension of {@link DatatypeC} and {@link DatatypeD}, making it
+ * the most comprehensive datatype. It encompasses all normative and extended
+ * characters defined by the DIN norm. It includes Latin, Greek, and Cyrillic
+ * alphabets, as well as non-letters N1-N4 and E1. Notably, while Datatype D
+ * excludes control characters and newlines (group N4), Datatype E includes them
+ * (inherited from Datatype C).
  *
  * It is primarily intended for cross-border data exchange where foreign
  * writing systems like Cyrillic or Greek are necessary. Texts with characters
