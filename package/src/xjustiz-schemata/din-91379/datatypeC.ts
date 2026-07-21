@@ -19,7 +19,6 @@ import {
   type NichtBuchstabenN3,
   type NichtBuchstabenN4,
 } from "./schriftzeichengruppe";
-import { type DatatypeA } from "./datatypeA"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { type DatatypeB } from "./datatypeB"; // oxlint-disable-line no-unused-vars -- referenced by TSDoc
 import { findInvalidCharacters } from "./unicode";
 import { transformXsdPatternToJavaScriptExpression } from "~/xjustiz-schemata/xml-schema-definition/restriction-pattern";
@@ -29,9 +28,10 @@ declare const TAG: unique symbol;
 /**
  * Datatype C of the DIN SPEC 91379 norm. A string with restricted character set.
  *
- * This is an extension of {@link DatatypeA} and {@link DatatypeB}, meant to be
- * used for general free text. That includes all Latin characters, plus additional
- * non-letters of the groups N1, N2, N3, and N4 ("Nicht-Buchstaben N1, 2, 3 und 4").
+ * This is an extension of {@link DatatypeB}, meant to be used for general
+ * free text. Unlike previous datatypes, Datatype C permits multi-line input
+ * (newlines like `\n` and `\r`, tabs, and structural controls from group N4),
+ * along with fractions and legal symbols from group N3.
  * Texts with Greek or Cyrillic letters or with extended (nicht-normativen)
  * Nicht-Buchstaben are inadmissible.
  *
