@@ -26,16 +26,16 @@ awkward to handle at runtime.
 
 ## Solution
 
-Scalars of this kind are represented as opaque types, using a branding
-technique. Instances can be constructed by parsing input values, verifying
-the invariants of the respective scalar. For example, a text based scalar with
-restricted character set is opaque to a plain string with the invariant that
-only allowed characters are contained.
+Scalars of this kind are represented as opaque types, using the [branding
+pattern](./type-branding.md). Instances can be constructed by parsing input
+values, verifying the invariants of the respective scalar. For example, a text
+based scalar with restricted character set is opaque to a plain string with the
+invariant that only allowed characters are contained.
 
-Because refined types get parsed once and are opaque otherwise, it must be
-ensured that they are read-only. Without this restriction, invariants would be
-asserted during parsing, but can be violated anytime afterward by alternating
-the variable.
+Because refined types get parsed once, it must be ensured that constructed
+instances are read-only. Without this restriction, invariants would be asserted
+during parsing, but can be violated anytime afterward by alternating the
+variable.
 
 For additional convenience, each refined type supports the [Standard
 Schema](https://standardschema.dev/schema) that significantly reduces the effort
@@ -49,28 +49,8 @@ implementation](../../package/src/xjustiz-schemata/shared-kernel/refined-types.t
 
 ### Branding
 
-Branding is implemented by extending a plain type with a tag that only exists in
-type system. Hence, instances are opaque and resolve to just the plain type at
-runtime. For example, a branded string is just a plain string at runtime. The
-branding exists solely for the compiler and is stripped during transpilation.
-
-For the tagging, a unique symbol is declared local to the module that hosts the
-refined type. We explicitly do not have a reusable base type for branding, that
-typically uses a plain string. While this approach is quite common, it is also
-less secure and requires more discipline of developers, including users of the
-library. Unique symbols that are locally declared in a module require more
-violative type escaping techniques that are less likely to happen and easier to
-spot in cases they should. In practice this demands a separated module per
-refined type. Only this module of the refined type itself is allowed to assert
-the compiler that an input is a valid instance via its parsing functions. This
-convention can't be assured by code but **must be ensured by developers**!
-A custom linting rule can help to better enforce this.
-
-The type should be documented to improve the developer experience to support
-directly in the IDE where an instance is expected.
-
-Following the design principle of descriptive type errors, an example branding
-for a plain string looks like this:
+Following the documentation for [type branding](./type-branding.md), the basis
+for an exemplary refined type would look like the following:
 
 `slug.ts`:
 

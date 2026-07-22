@@ -102,3 +102,4 @@ Rollenbezeichnungen
 initializer(s?)
 Eszett
 transpiler(s?)
+primitive

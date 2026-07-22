@@ -7,7 +7,7 @@ import { type StandardSchemaV1 } from "@standard-schema/spec";
  * This is the canonical implementation for the refined types pattern. Check out
  * the [documentation of the pattern](../../../../documentation/patterns/refined-types.md)
  * for reasoning and further details. Practical examples can be discovered by
- * inspecting the list of reference usages of this function.
+ * inspecting reference usages in the codebase.
  *
  * See the resulting {@link RefinedTypeFactory} to learn more about capabilities
  * and usage examples of factories.
