@@ -61,3 +61,10 @@ export type ConsumeCharactersFrom<
 > = Input extends `${SetOfCharactersToConsume}${infer Rest}`
   ? ConsumeCharactersFrom<Rest, SetOfCharactersToConsume>
   : Input;
+
+/**
+ * Mathematical invariant over `Basis` by putting it in a function signature
+ * on the input (contravariant) as well as the output side (covariant).
+ * Typically used to ensure the true identity of a base type.
+ */
+export type Invariant<Basis> = (basis: Basis) => Basis;

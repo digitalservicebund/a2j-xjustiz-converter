@@ -103,3 +103,5 @@ initializer(s?)
 Eszett
 transpiler(s?)
 primitive
+Beteiligung(en?)
+contravariant
