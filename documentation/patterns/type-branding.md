@@ -72,20 +72,20 @@ on the actual use case and higher level implementation pattern. Some might
 provide a parse function that returns constructed instances, having all
 invariants validated (see [refined types pattern](./refined-types.md)).
 
-It is important, that the explicit casting of the type happens only within the
+It is important, that the explicit assertion of the type happens only within the
 module of the branded type. This acts security boundary. Any occurrence of some
-code that casts to a branded type in a module that does not contain the related
-tag symbol declaration is a violation of this pattern! This rule can't be
-assured by code but **must be ensured by developers!** A custom linting rule can
-help to better enforce this.
+code that asserts a value as branded type in a module that does not contain the
+related tag symbol declaration is a violation of this pattern! This rule can't
+be assured by code but **must be ensured by developers!** A custom linting rule
+can help to better enforce this.
 
 Although the unique symbol is declared within the same module, it is still
-necessary to cast to the branded type. In the example of the `Email`, a string
-must be cast to the `Email` type. For the majority of main types, it is just not
+necessary to assert the branded type. In the example of the `Email`, a string
+must be asserted as `Email` type. For the majority of main types, it is just not
 possible to construct an actual valid instance of the branded type (e.g.
 a string intersected with an object for the tag). Plus, the symbol of the tag
 property itself is only declared as type, but without an actual runtime value
-for it. Therefore, it is necessary to apply typecasting. This is basically an
+for it. Therefore, it is necessary to apply type assertion. This is basically an
 explicit call to the compiler. Thereby, it will likely violate linting rules of
 static code analysis tools. A comment to ignore the respective rule for the
 specific line is the common practice. A short explanation should be
@@ -95,7 +95,7 @@ supplemented.
 export function email(input: string): Email {
   /* Validate input... */
 
-  // oxlint-disable-next-line no-unsafe-type-assertion -- explicit cast for branding
+  // oxlint-disable-next-line no-unsafe-type-assertion -- explicit assertion for branding
   return input as unknown as Email;
 }
 ```

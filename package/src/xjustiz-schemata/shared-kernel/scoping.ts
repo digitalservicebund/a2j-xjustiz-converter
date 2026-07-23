@@ -69,7 +69,7 @@ export type WithScope<Scope> = {
 export function withScope<ScopeFreeOutput>(
   scopedBlock: <UniqueScope>(scope: WithScope<UniqueScope>) => ScopeFreeOutput,
 ): ScopeFreeOutput {
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- explicit cast "trick" for branding
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- explicit assertion for branding
   const scope = Symbol(
     "unique scope representative (don't actually use at runtime, compile-time construct)",
   ) as unknown as WithScope<unknown>;

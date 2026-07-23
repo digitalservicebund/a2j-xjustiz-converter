@@ -160,7 +160,7 @@ a successful result or a failure with a message. Using this type in the
 signature of the parse function, the compiler can predetermine the result of
 a parse call, if the input argument is a static literal. Because the compiler
 can't work this out deeply with the runtime implementation, a deliberate type
-cast of the public function signature is required.
+assertion of the public function signature is required.
 
 In addition, to make runtime and compile-time issue messages as coherent as
 possible, the default issue messages should be reused inside the type parsing.

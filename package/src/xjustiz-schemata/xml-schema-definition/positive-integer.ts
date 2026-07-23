@@ -37,7 +37,8 @@ function parsePositiveInteger(
       return { issues: [{ message: issueMessages.notPositive }] };
       // oxlint-disable-next-line no-else-return -- false positive
     } else {
-      return { value: input as unknown as PositiveInteger }; // oxlint-disable-line no-unsafe-type-assertion -- explicit cast "trick" for branding
+      // oxlint-disable-next-line no-unsafe-type-assertion -- explicit assertion for branding
+      return { value: input as unknown as PositiveInteger };
     }
   } as <Value extends number>(
     input: Value,

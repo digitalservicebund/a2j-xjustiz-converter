@@ -43,7 +43,8 @@ function parseDatatypeA(
     const composedUnicodeInput = input.normalize("NFC");
 
     if (DATATYPE_A_PATTERN.test(composedUnicodeInput)) {
-      return { value: composedUnicodeInput as unknown as DatatypeA }; // oxlint-disable-line no-unsafe-type-assertion -- explicit cast "trick" for branding
+      // oxlint-disable-next-line no-unsafe-type-assertion -- explicit assertion for branding
+      return { value: composedUnicodeInput as unknown as DatatypeA };
       // oxlint-disable-next-line no-else-return -- false positive
     } else {
       const characters = findInvalidCharacters(

@@ -45,7 +45,8 @@ function parseDatatypeB(
     const composedUnicodeInput = input.normalize("NFC");
 
     if (DATATYPE_B_PATTERN.test(composedUnicodeInput)) {
-      return { value: composedUnicodeInput as unknown as DatatypeB }; // oxlint-disable-line no-unsafe-type-assertion -- explicit cast "trick" for branding
+      // oxlint-disable-next-line no-unsafe-type-assertion -- explicit assertion for branding
+      return { value: composedUnicodeInput as unknown as DatatypeB };
 
       // oxlint-disable-next-line no-else-return -- false positive
     } else {
