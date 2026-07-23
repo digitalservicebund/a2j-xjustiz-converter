@@ -65,6 +65,24 @@ available on the global context object (`globalThis`):
 
 - `Intl.Segmenter` (for Unicode segmentation)
 
+## A Word on Type Security
+
+The library is built around a strong type system, following the approach of
+type-driven development to provide compile-time guarantees for valid
+XJustiz-Nachrichten. In that regard, it is important that library users **do not
+work against the compiler**. Within the context of using the library, users
+should strictly refrain from using the `any` type, using unsafe type assertions
+(e.g. `as unknown as SomeStrictType`), or ignoring errors with annotations (e.g.
+`@ts-expect-error`). Doing so means fighting against the library and risk
+producing runtime errors by incorrectly composed messages.
+
+It is recommended to use strict linting rules to assist staying disciplined and
+catch violations early. At least for the part of the codebase that interacts
+with the XJustiz-Converter. Such could be for example Oxlint rules (e.g.
+[`no-explicit-any`](https://oxc.rs/docs/guide/usage/linter/rules/typescript/no-explicit-any.html),
+[`no-unsafe-type-assertions`](https://oxc.rs/docs/guide/usage/linter/rules/typescript/no-unsafe-type-assertion.html))
+or their respective counterpart by ESLint.
+
 ## Usage
 
 The XJustiz standard is developed around the concept of messages as primary
