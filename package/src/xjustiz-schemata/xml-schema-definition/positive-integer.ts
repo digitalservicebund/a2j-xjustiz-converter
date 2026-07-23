@@ -8,6 +8,7 @@ import {
   defineRefinedType,
   isNumber,
 } from "~/xjustiz-schemata/shared-kernel/refined-types";
+import { type Arbitrary } from "fast-check";
 import { type DeepLiteralToPrimitive } from "~/metatypes";
 
 declare const TAG: unique symbol;
@@ -94,6 +95,11 @@ export const positiveInteger = defineRefinedType(
   isNumber,
   parsePositiveInteger,
 );
+
+export function increment(operand: PositiveInteger): PositiveInteger {
+  // oxlint-disable-next-line no-unsafe-type-assertion -- explicit assertion for branding
+  return (operand + 1) as unknown as PositiveInteger;
+}
 
 if (import.meta.vitest) {
   const { describe, it, test, expect, expectTypeOf } = import.meta.vitest;
@@ -343,5 +349,31 @@ if (import.meta.vitest) {
         >();
       });
     });
+
+    describe("incrementing", () => {
+      it("increments the operand by one", () => {
+        assert(
+          property(arbitraryPositiveInteger(), (operand) => {
+            expect(increment(operand)).toStrictEqual(operand + 1);
+          }),
+        );
+      });
+
+      it("produces only valid positive integers that could be parsed again", () => {
+        assert(
+          property(arbitraryPositiveInteger(), (operand) => {
+            const output = increment(operand);
+            expect(positiveInteger(output)).toStrictEqual({ value: output });
+          }),
+        );
+      });
+    });
+
+    function arbitraryPositiveInteger(): Arbitrary<PositiveInteger> {
+      return arbitraryInteger({ min: 1 })
+        .map((input) => positiveInteger(input))
+        .filter((result) => result.issues === undefined)
+        .map((result) => result.value);
+    }
   });
 }

@@ -65,7 +65,7 @@ a local unique symbol quickly offsets the import of a base brand type. Notice
 that there still can be branded types which themselves are generic to a type
 parameter — on top of the branding.
 
-### Smart Constructors & Manipulation
+### Smart Constructors
 
 The actual construction of instances for the branded type can differ depending
 on the actual use case and higher level implementation pattern. Some might
@@ -120,4 +120,81 @@ type Address = DeepReadonly<{
 }> & {
   /* tagging ... */
 };
+```
+
+### Operating on Branded Values
+
+Branded types are transparent to their main type and can be used everywhere the
+main type is expected. For example, a branded string type can be used as string
+everywhere. Unfortunately, such operations will loose the branding.
+
+```typescript
+const labelWithReceivers = allEmails.join(", "); // becomes string
+
+const internalAddresses = allEmails.filter((email) =>
+  email.endsWith("company.com"),
+); // becomes string[]
+```
+
+To some parts, the TypeScript is just unable to correctly track the type.
+Partially this is caused by the signature of the functions used. However, there
+are many possible operations on a branded type that violate the constraints of
+it. For example, a string based type that was constructed with the check that it
+complies to a restricted character set, can't be used in a string template or
+joined together. There is no way for the compiler to ensure the invariants are
+maintained.
+
+The only unit who can verify that the invariants remain intact is the module
+responsible for the type. Therefore, any operation that is required must be
+added to this module. Thereby, the type assertions stay inside the module as
+required. Most operations are straightforward to implement and might even just
+use existing operations under the hood with the necessary type assertion.
+However, it is the responsibility of the module author to ensure the invariants
+are meet, complemented with the tests that help to verify correct behavior.
+
+```typescript
+/* ... branded type and smart constructor definition ... */
+
+export function join(
+  values: RestrictedStringType[],
+  separator: RestrictedStringType,
+): RestrictedStringType {
+  // oxlint-disable-next-line no-unsafe-type-assertion -- explicit assertion for branding
+  return emails.join(separator) as unknown as RestrictedStringType;
+}
+
+if (import.meta.vitest) {
+  describe("restricted string type", async () => {
+    const {
+      assert,
+      property,
+      array: arbitraryArray,
+      string: arbitraryString,
+    } = await import("fast-check");
+
+    describe("join", () => {
+      // TODO: Test correct behavior ...
+
+      it("produces only valid restricted strings as output that can be parsed again", () => {
+        assert(
+          property(
+            arbitraryArray(arbitraryRestrictedStringType()),
+            arbitraryStringType(),
+            (values, separator) => {
+              const output = join(values, separator);
+              expect(parseRestrictedStringType).toBeSuccessful(); // Fake. How ever the parsing works.
+            },
+          ),
+        );
+      });
+    });
+
+    function arbitraryRestrictedStringType(): Arbitrary<RestrictedStringType> {
+      return arbitraryString()
+        .map((input) => parseRestrictedStringType(input))
+        .filter((result) => result.issues === undefined)
+        .map((result) => result.value);
+    }
+  });
+}
 ```
