@@ -172,3 +172,7 @@ To remain flexible and environment agnostic, global APIs like `Intl`, `Crypto`,
 or `Temporal` must be accessed explicitly via the global context object using
 `globalThis` (e.g. `globalThis.Intl`). This also makes external dependencies
 more explicit and discoverable.
+
+APIs that are not part of the ECMAScript itself, should be explicitly declared
+in `package/src/global.d.ts` and communicated to library users in the
+[list of requirements](./package/README.md#requirements).

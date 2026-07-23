@@ -64,6 +64,7 @@ development, testing, and production. The following APIs are expected to be
 available on the global context object (`globalThis`):
 
 - `Intl.Segmenter` (for Unicode segmentation)
+- `crypto.randomUUID` (for unique identifier generation, UUID v4 expected)
 
 ## A Word on Type Security
 

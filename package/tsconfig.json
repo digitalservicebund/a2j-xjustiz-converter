@@ -4,6 +4,13 @@
     "target": "ES2024",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    /*
+     * **ATTENTION:**
+     * We try to be as runtime environment agnostic as possible. Try to avoid
+     * adding any new entries here. Rather declare global dependencies inside the
+     * global.d.ts file and communicate them clearly as requirements to users of
+     * the library.
+     */
     "lib": ["ES2024"],
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
