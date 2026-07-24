@@ -95,3 +95,10 @@ Koordinierungsstelle
 unrepresentable
 [Cc]ontextive
 Japanese
+Codeliste(n?)
+Codelisteneintrag
+Codelisteneinträge
+Rollenbezeichnungen
+initializer(s?)
+Eszett
+transpiler(s?)

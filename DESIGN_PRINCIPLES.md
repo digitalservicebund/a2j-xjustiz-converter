@@ -59,6 +59,16 @@ Therefore, German is used directly for any terminology of the domain, embedded
 in a technical frame of English code and documentation. See also [decision record 0002](./documentation/decision-records/0002-use-german-for-the-domain-and-english-for-technical-code.md)
 for more details and conventions.
 
+For better compatibility, German umlaut vowels and Eszett are transliterated
+(e.g. `ä` -> `ae`, `ß` -> `ss`) when used for symbols/identifiers in program
+code. Furthermore, we sadly can not apply gender neutral language
+everywhere in code. Identifiers do not support colons or similar
+punctuation. Other attempts to encode these conventions in typical camel,
+snake, or other case types produce names that are difficult
+to read. Especially when used in conjunction with more words to compose function
+names for example (e.g. `klaegerInBestimmen`). Domain terms in code should
+use the simplest, most readable form of the word.
+
 ## Schema References for JSON Files
 
 Any JSON file in the repository that follows a schema must reference it, using
