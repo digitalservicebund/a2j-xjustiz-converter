@@ -32,6 +32,15 @@ application and TypeScript compiler, providing short feedback loops and catching
 invalid data at the source — without requiring developers to become XJustiz
 experts. A message that leaves the system is guaranteed to be valid.
 
+## Standard Conformity
+
+The XJustiz-Converter does not support the XJustiz standard to its full extend.
+Development is driven by the use cases of the [Onlinedienste der
+Justiz](https://service.justiz.de). The goal is not an all-encompassing, generic
+solution. But a focused solution that provides true value for the Onlinedienste.
+More on this in our [design
+principles](./DESIGN_PRINCIPLES.md#progressive-implementation-by-use-case).
+
 ## Getting Started
 
 The [TypeScript library](./package/README.md) provides installation

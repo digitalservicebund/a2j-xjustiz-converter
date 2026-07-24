@@ -14,6 +14,9 @@ the standard and compose messages that are valid based on compile-time
 guarantees. This provides early feedback to developers working on services,
 without affecting the end-user experience in production negatively.
 
+To learn more about the motivation, the scope, and approach of the
+XJustiz-Converter, read the [documentation overview](../README.md).
+
 > [!IMPORTANT]
 > The XJustiz-Converter is heavily focused and developed primarily for the usage
 > by the [Onlinedienste der Justiz](https://service.justiz.de) (online services

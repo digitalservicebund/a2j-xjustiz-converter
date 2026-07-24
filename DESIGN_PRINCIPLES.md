@@ -4,6 +4,20 @@ At the current point in time, this document consist of a loose collection of
 principles per section. Many of them have their root in the
 [decision-records](./documentation/decision-records/).
 
+## Progressive Implementation by Use Case
+
+We do not intend to implement the full XJustiz standard as it its entirety.
+Based on the use cases by the Onlinedienste der Justiz, we continuously discover
+the standard and progressively implement what is required. To goal is not an
+all-encompassing, generic solution that just covers everything. We wanna provide
+true value to the Onlinedienste, providing them with solutions that helps them
+to provide the best possible end-user experience.
+
+However, we put great effort into a solid foundation that enables us to speed up
+over time without loss in quality. Discovering and implementing new aspects of
+the standard should become a standardized workflow, accelerated by the strong
+base we created.
+
 ## Document-Driven Development
 
 We believe in the strength and advantages of a documentation first approach.
