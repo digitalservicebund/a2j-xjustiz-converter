@@ -1,5 +1,12 @@
 # Agent Instructions
 
+> [!IMPORTANT]
+> Always use progressive disclosure to find something in the repository! Do not
+> use plain discovery tools like find, grep, etc. to search by brute force. Use
+> the given keywords in the prompts to find your way more quickly. In code, try
+> to use language servers to discover symbols, definitions, references, etc.
+> Below are the most important anchors listed.
+
 This repository uses documentation-driven development with a structure that
 allows for progressively disclosure of relevant information. The anchor for
 everything is the root [README](./README.md). It provides the base context and
